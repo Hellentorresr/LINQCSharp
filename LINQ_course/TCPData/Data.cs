@@ -12,7 +12,7 @@ namespace TCPData
         {
             List<Employee> employees = new();
 
-            Employee employee = new Employee
+            Employee employee = new()
             {
                 Id = 1,
                 FirstName = "Bob",
@@ -58,9 +58,9 @@ namespace TCPData
 
         public static List<Department> GetDepartments()
         {
-            List<Department> departments = new List<Department>();
+            List<Department> departments = new();
 
-            Department department = new Department
+            Department department = new()
             {
                 Id = 1,
                 ShortName = "HR",
