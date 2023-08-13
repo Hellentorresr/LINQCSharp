@@ -365,7 +365,23 @@ namespace ThePretendCompanyApplication
             var groupResult = employees.GroupBy(emp => emp.DepartmentId);
 
 
-            foreach (var empGroup in groupResult)
+            //foreach (var empGroup in groupResult)
+            //{
+            //    Console.WriteLine($"Department Id: {empGroup.Key}");
+
+            //    foreach (Employee emp in empGroup)
+            //    {
+            //        Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
+            //    }
+            //}
+
+            //we have to end all of our queries using query syntax either with
+            //the select operator or a group operator 
+
+            //ToLookup method-- works exactly the same way as GroupBy
+            var groupResult_ = employees.ToLookup(emp => emp.DepartmentId);
+
+            foreach (var empGroup in groupResult_)
             {
                 Console.WriteLine($"Department Id: {empGroup.Key}");
 
