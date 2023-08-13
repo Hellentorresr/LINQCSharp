@@ -300,7 +300,33 @@ namespace ThePretendCompanyApplication
             //        }
             //    ).OrderBy(id => id.employeeDept);
 
+            //First coding the query using method syntax
+            //OrderByDescending 3 2 1
+            //var result = employees.Join(departments,
+            //    emp => emp.DepartmentId,
+            //    dep => dep.Id,
+            //        (empl, dept) => new
+            //        {
+            //            FullName = empl.FirstName + " " + empl.LastName,
+            //            employeeDept = dept.Id,
+            //            departLongName = dept.LongName
+            //        }
+            //    ).OrderByDescending(id => id.employeeDept);
 
+            //Now sorting by department id and the by the annual salary property in ascending order
+            var result = employees.Join(departments,
+               emp => emp.DepartmentId,
+               dep => dep.Id,
+                   (empl, dept) => new
+                   {
+                       FullName = empl.FirstName + " " + empl.LastName,
+                       employeeDept = dept.Id,
+                       departLongName = dept.LongName,
+                       empl.AnnualSalary
+                   }
+               ).OrderBy(id => id.employeeDept).ThenBy(sal => sal.AnnualSalary);
+
+            foreach (var item in result) Console.WriteLine(item);
         }
 
     }
