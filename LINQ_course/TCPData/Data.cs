@@ -49,7 +49,7 @@ namespace TCPData
                 LastName = "Stevens",
                 AnnualSalary = 30000.2m,
                 IsManager = false,
-                DepartmentId = 3
+                DepartmentId = 2
             };
             employees.Add(employee);
 

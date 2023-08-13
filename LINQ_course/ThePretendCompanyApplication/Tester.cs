@@ -80,8 +80,8 @@ namespace ThePretendCompanyApplication
         //}
 
         //second part of the course- Linq examples 1
-        static void Main()
-        {
+        //static void Main()
+        //{
             //List<Employee> employees = Data.GetEmployees();
             //List<Department> departments = Data.GetDepartments();
 
@@ -191,6 +191,8 @@ namespace ThePretendCompanyApplication
             //    );
 
             // Join Operation Example - Query Syntax
+            //INNER JOIN: Returns only the rows where there is a match in both tables.
+            //In this case if a deparment does not have employees it wont be incluted in the result
             //var result = from dept in departments
             //             join emp in employees
             //             on dept.Id equals emp.DepartmentId
@@ -206,42 +208,68 @@ namespace ThePretendCompanyApplication
             //    Console.WriteLine($"{item.FullName,-20} {item.AnnualSalary,10}\t{item.DepartmentName}");
             //}
 
+            //Console.WriteLine("\t\t");
 
-            ///LEFT OUTER JOIN
-            ///Method syntax
-            List<Employee> employees = Data.GetEmployees();
-            List<Department> departments = Data.GetDepartments();
+            //LEFT OUTER JOIN
+            //Method syntax
+            //LINQ GroupJoin
+            //If an employee has a department id that does not exist in the Department
+            //list that employee will get excluded from the result
+            //List<Employee> employees = Data.GetEmployees();
+            //List<Department> departments = Data.GetDepartments();
 
-            var results = departments.GroupJoin(employees,
-                    dep => dep.Id,
-                    emp => emp.DepartmentId,
-                    (dep, employeeGroup) => new
-                    {
-                        employees = employeeGroup,
-                        dep.LongName
-                    }
-                );
+            //var results = departments.GroupJoin(employees,
+            //        dep => dep.Id,
+            //        emp => emp.DepartmentId,
+            //        (dep, employeeGroup) => new
+            //        {
+            //            employees = employeeGroup,
+            //            dep.LongName
+            //        }
+            //    );
 
-            foreach (var item in results)
-            {
-                Console.WriteLine($"Department name: {item.LongName,-20}");
-                foreach (var emp in item.employees) Console.WriteLine($"\tEmployee name: {emp.FirstName} {emp.LastName}, department: {emp.DepartmentId}");
-            }
-        }
+
+            //LEFT OUTER JOIN
+            //Query syntax
+            //LINQ GroupJoin
+            //If an employee has a department id that does not exist in the Department
+            //list that employee will get excluded from the result
+            //var results = from dep in departments
+            //              join emp in employees
+            //              on dep.Id equals emp.DepartmentId
+            //              into employeeGroup
+            //              select new
+            //              {
+            //                  employees = employeeGroup,
+            //                  dep.LongName
+            //              };
+
+            //foreach (var item in results)
+            //{
+            //    Console.WriteLine($"Department name: {item.LongName,-20}");
+            //    foreach (var emp in item.employees)
+            //    {
+            //        Console.WriteLine($"\tEmployee name: {emp.FirstName} {emp.LastName}," +
+            //        $" department: {emp.DepartmentId}");
+            //    }
+            //}
+        //}
+
+       
     }
 
     //Implementing my own deferred functionality
-    public static class EnumerableCollectionExtentionMethods
-    {
-        public static IEnumerable<Employee> GetHighSalaryEmp(this IEnumerable<Employee> employees)
-        {
-            foreach (Employee emp in employees)
-            {
-                Console.WriteLine($"Accessing employee: {emp.FirstName} {emp.LastName}");
-                if (emp.AnnualSalary >= 50000)
-                    yield return emp;
-            }
-        }
-    }
+    //public static class EnumerableCollectionExtentionMethods
+    //{
+    //    public static IEnumerable<Employee> GetHighSalaryEmp(this IEnumerable<Employee> employees)
+    //    {
+    //        foreach (Employee emp in employees)
+    //        {
+    //            Console.WriteLine($"Accessing employee: {emp.FirstName} {emp.LastName}");
+    //            if (emp.AnnualSalary >= 50000)
+    //                yield return emp;
+    //        }
+    //    }
+    //}
 }
  
