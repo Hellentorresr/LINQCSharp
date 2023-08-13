@@ -378,7 +378,7 @@ namespace ThePretendCompanyApplication
             //we have to end all of our queries using query syntax either with
             //the select operator or a group operator 
 
-            //ToLookup method-- works exactly the same way as GroupBy(its execution is deffer)
+            //ToLookup method-- works exactly the same way as GroupBy(its execution is deferred)
             //But the difference is that the execution of this query is immediately
             var groupResult_ = employees.ToLookup(emp => emp.DepartmentId);
 
