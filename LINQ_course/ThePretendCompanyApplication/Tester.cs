@@ -314,19 +314,44 @@ namespace ThePretendCompanyApplication
             //    ).OrderByDescending(id => id.employeeDept);
 
             //Now sorting by department id and the by the annual salary property in ascending order
-            var result = employees.Join(departments,
-               emp => emp.DepartmentId,
-               dep => dep.Id,
-                   (empl, dept) => new
-                   {
-                       FullName = empl.FirstName + " " + empl.LastName,
-                       employeeDept = dept.Id,
-                       departLongName = dept.LongName,
-                       empl.AnnualSalary
-                   }
-               ).OrderBy(id => id.employeeDept).ThenBy(sal => sal.AnnualSalary);
+            //var result = employees.Join(departments,
+            //   emp => emp.DepartmentId,
+            //   dep => dep.Id,
+            //       (empl, dept) => new
+            //       {
+            //           FullName = empl.FirstName + " " + empl.LastName,
+            //           employeeDept = dept.Id,
+            //           departLongName = dept.LongName,
+            //           empl.AnnualSalary
+            //       }
+            //   ).OrderBy(id => id.employeeDept).ThenBy(sal => sal.AnnualSalary);
 
-            foreach (var item in result) Console.WriteLine(item);
+            //The same query but using query syntax
+            //var result = from emp in employees
+            //             join dep in departments
+            //             on emp.DepartmentId equals dep.Id
+            //             orderby emp.DepartmentId, emp.AnnualSalary
+            //             select new
+            //             {
+            //                 FullName = emp.FirstName + " " + emp.LastName,
+            //                 employeeDept = dep.Id,
+            //                 departLongName = dep.LongName,
+            //                 emp.AnnualSalary
+            //             };
+
+
+            //var result = (from emp in employees
+            //              join dep in departments
+            //              on emp.DepartmentId equals dep.Id
+            //              select new
+            //              {
+            //                  FullName = emp.FirstName + " " + emp.LastName,
+            //                  employeeDept = dep.Id,
+            //                  departLongName = dep.LongName,
+            //                  emp.AnnualSalary
+            //              }).OrderBy(sal => sal.AnnualSalary);
+
+           // foreach (var item in result) Console.WriteLine(item);
         }
 
     }
