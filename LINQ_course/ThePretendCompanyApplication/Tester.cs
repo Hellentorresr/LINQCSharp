@@ -351,8 +351,29 @@ namespace ThePretendCompanyApplication
             //                  emp.AnnualSalary
             //              }).OrderBy(sal => sal.AnnualSalary);
 
-           // foreach (var item in result) Console.WriteLine(item);
-        }
+            // foreach (var item in result) Console.WriteLine(item);
 
+
+
+            //      The grouping operators
+            //Group by
+            //query the employees collection and group the result by the departmentId propery
+            var result = from emp in employees
+                         group emp by emp.DepartmentId;
+
+            //Using method sintax
+            var groupResult = employees.GroupBy(emp => emp.DepartmentId);
+
+
+            foreach (var empGroup in groupResult)
+            {
+                Console.WriteLine($"Department Id: {empGroup.Key}");
+
+                foreach (Employee emp in empGroup)
+                {
+                    Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
+                }
+            }
+        }
     }
 }
