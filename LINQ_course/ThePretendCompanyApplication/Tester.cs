@@ -380,17 +380,41 @@ namespace ThePretendCompanyApplication
 
             //ToLookup method-- works exactly the same way as GroupBy(its execution is deferred)
             //But the difference is that the execution of this query is immediately
-            var groupResult_ = employees.ToLookup(emp => emp.DepartmentId);
+            //var groupResult_ = employees.ToLookup(emp => emp.DepartmentId);
 
-            foreach (var empGroup in groupResult_)
-            {
-                Console.WriteLine($"Department Id: {empGroup.Key}");
+            //foreach (var empGroup in groupResult_)
+            //{
+            //    Console.WriteLine($"Department Id: {empGroup.Key}");
 
-                foreach (Employee emp in empGroup)
-                {
-                    Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
-                }
-            }
+            //    foreach (Employee emp in empGroup)
+            //    {
+            //        Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
+            //    }
+            //}
+
+
+
+            //Quantifier operators -- All Any Contains
+
+            /*The LINQ All Method is used to check whether all the elements of a data 
+             * source satisfy a given condition or not. If all the elements satisfy the given 
+             * condition, then it returns true else returns false.*/
+            var annualSalaryCompere = 20000;
+
+            bool isTrueAll = employees.All(e => e.AnnualSalary > annualSalaryCompere);
+
+            Console.WriteLine(isTrueAll ? $"All employee annual salaries are above {annualSalaryCompere}"
+                : $"Not all employee annual salaries are above {annualSalaryCompere}");
+
+
+            //the Any LINQ method
+            /*is used to check whether at least one of the elements of a data source satisfies 
+             * a given condition or not. If any of the elements satisfy the given condition,
+             * then it returns true else returns false. It is also used to check whether 
+             * a collection contains some*/
+            bool isTrueAny = employees.Any(e => e.AnnualSalary < annualSalaryCompere);
+            Console.WriteLine(isTrueAny ? "any is true" : "No");
+
         }
     }
 }
