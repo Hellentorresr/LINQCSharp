@@ -1,6 +1,7 @@
 ﻿using TCPExtentions;
 using TCPData;
 using System.Linq;
+using System.Collections;
 
 namespace ThePretendCompanyApplication
 {
@@ -422,11 +423,21 @@ namespace ThePretendCompanyApplication
             //we want to be able to assest whether an employee record exists within
             //our collection of employees
 
-            var employee = employees.FirstOrDefault(em => em.Id == 50);
+            //var employee = employees.FirstOrDefault(em => em.Id == 50);
 
-            bool constainsEmployee = employee != null && employees.Contains(employee);
+            //bool constainsEmployee = employee != null && employees.Contains(employee);
 
-            Console.WriteLine(constainsEmployee ? $"The employee exists its name is: {employee.FirstName}" : "The employee does not exist");
+            //Console.WriteLine(constainsEmployee ? $"The employee exists its name is: {employee.FirstName}" : "The employee does not exist");
+
+
+            //  >> Filter Operators OfType and Where <<
+            ArrayList mixedCollection = Data.GetHeterogeneousDataCollection();
+
+            //OfType
+            var stringResult = from s in mixedCollection.OfType<string>()
+                               select s;
+
+            foreach ( var mixed in stringResult) Console.WriteLine(mixed);
         }
     }
 }
