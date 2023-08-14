@@ -407,13 +407,15 @@ namespace ThePretendCompanyApplication
                 : $"Not all employee annual salaries are above {annualSalaryCompere}");
 
 
+
             //the Any LINQ method
             /*is used to check whether at least one of the elements of a data source satisfies 
              * a given condition or not. If any of the elements satisfy the given condition,
              * then it returns true else returns false. It is also used to check whether 
              * a collection contains some*/
-            bool isTrueAny = employees.Any(e => e.AnnualSalary < annualSalaryCompere);
-            Console.WriteLine(isTrueAny ? "any is true" : "No");
+            bool isTrueAny = employees.Any(e => e.AnnualSalary >= annualSalaryCompere);
+            Console.WriteLine(isTrueAny ? $"At least a salary is equals or greater to {annualSalaryCompere}" 
+                : $"None of the salaries are below than {annualSalaryCompere}");
 
         }
     }
