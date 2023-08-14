@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,5 +86,25 @@ namespace TCPData
             return departments;
         }
 
+        // By nature, ArrayList holds a heterogeneous collection of objects. This means that
+        // in a single instance of ArrayList, we can store objects of any data type.
+        public static ArrayList GetHeterogeneousDataCollection()
+        {
+            ArrayList arrayList = new()
+            {
+                100,
+                "Bob Jones",
+                2000,
+                3000,
+                "Bill Henderson",
+                new Employee { Id =6,FirstName="Jennifer", LastName="Dale",AnnualSalary =90000, IsManager = true, DepartmentId = 1 },
+                new Employee { Id = 7, FirstName = "Dane", LastName = "Hughes", AnnualSalary = 60000, IsManager = false, DepartmentId = 2 },
+                new Department { Id = 4, ShortName = "MKT", LongName = "Marketing" },
+                new Department { Id = 5, ShortName = "R&D", LongName = "Research and Development" },
+                new Department { Id = 6, ShortName = "PRD", LongName = "Production" }
+            };
+
+            return arrayList;
+        }
     }
 }
