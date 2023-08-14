@@ -445,16 +445,21 @@ namespace ThePretendCompanyApplication
 
             //foreach (var ints in listOfIntegers) Console.WriteLine(ints);
 
-            var listOfEmp = from objs in mixedCollection.OfType<Employee>()
-                                select objs;
+            //var listOfEmp = from objs in mixedCollection.OfType<Employee>()
+            //                    select objs;
 
-            foreach(var obj in listOfEmp) Console.WriteLine($"Name: {obj.FirstName}");
+            //foreach(var obj in listOfEmp) Console.WriteLine($"Name: {obj.FirstName}");
 
-            var listOfDepart = from obj in mixedCollection.OfType<Department>()
-                               select obj;
+            //var listOfDepart = from obj in mixedCollection.OfType<Department>()
+            //                   select obj;
 
-            foreach (var dep in listOfDepart) Console.WriteLine($"Department name: {dep.LongName}");
+            //foreach (var dep in listOfDepart) Console.WriteLine($"Department name: {dep.LongName}");
 
+
+            /*              >>> Element Operators <<<           */
+            //1. ElementAt: Returns an element present within a specific index in a collection
+            var employee = employees.ElementAt(8);
+            Console.WriteLine($"Name: {employee.FirstName}");
         }
     }
 }
