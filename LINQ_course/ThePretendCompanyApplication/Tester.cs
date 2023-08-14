@@ -440,10 +440,20 @@ namespace ThePretendCompanyApplication
             //foreach ( var mixed in stringResult) Console.WriteLine(mixed);
 
             //Now let's query all interger values in our ArrayList
-            var listOfIntegers = from integerVals in mixedCollection.OfType<int>()
-                                 select integerVals;
+            //var listOfIntegers = from integerVals in mixedCollection.OfType<int>()
+            //                     select integerVals;
 
-            foreach (var ints in listOfIntegers) Console.WriteLine(ints);
+            //foreach (var ints in listOfIntegers) Console.WriteLine(ints);
+
+            var listOfEmp = from objs in mixedCollection.OfType<Employee>()
+                                select objs;
+
+            foreach(var obj in listOfEmp) Console.WriteLine($"Name: {obj.FirstName}");
+
+            var listOfDepart = from obj in mixedCollection.OfType<Department>()
+                               select obj;
+
+            foreach (var dep in listOfDepart) Console.WriteLine($"Department name: {dep.LongName}");
 
         }
     }
