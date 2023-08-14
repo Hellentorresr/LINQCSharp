@@ -434,10 +434,17 @@ namespace ThePretendCompanyApplication
             ArrayList mixedCollection = Data.GetHeterogeneousDataCollection();
 
             //OfType
-            var stringResult = from s in mixedCollection.OfType<string>()
-                               select s;
+            //var stringResult = from s in mixedCollection.OfType<string>()
+            //                   select s;
 
-            foreach ( var mixed in stringResult) Console.WriteLine(mixed);
+            //foreach ( var mixed in stringResult) Console.WriteLine(mixed);
+
+            //Now let's query all interger values in our ArrayList
+            var listOfIntegers = from integerVals in mixedCollection.OfType<int>()
+                                 select integerVals;
+
+            foreach (var ints in listOfIntegers) Console.WriteLine(ints);
+
         }
     }
 }
