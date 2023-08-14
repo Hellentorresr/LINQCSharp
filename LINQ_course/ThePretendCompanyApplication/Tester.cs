@@ -458,6 +458,7 @@ namespace ThePretendCompanyApplication
 
             /*              >>> Element Operators <<<           */
             //1. ElementAt: Returns an element present within a specific index in a collection
+            // Or Error: 'Index was out of range. 
             var employee = employees.ElementAt(8);
             Console.WriteLine($"Name: {employee.FirstName}");
         }
