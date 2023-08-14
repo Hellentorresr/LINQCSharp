@@ -399,12 +399,12 @@ namespace ThePretendCompanyApplication
             /*The LINQ All Method is used to check whether all the elements of a data 
              * source satisfy a given condition or not. If all the elements satisfy the given 
              * condition, then it returns true else returns false.*/
-            var annualSalaryCompere = 20000;
+            //var annualSalaryCompere = 20000;
 
-            bool isTrueAll = employees.All(e => e.AnnualSalary > annualSalaryCompere);
+            //bool isTrueAll = employees.All(e => e.AnnualSalary > annualSalaryCompere);
 
-            Console.WriteLine(isTrueAll ? $"All employee annual salaries are above {annualSalaryCompere}"
-                : $"Not all employee annual salaries are above {annualSalaryCompere}");
+            //Console.WriteLine(isTrueAll ? $"All employee annual salaries are above {annualSalaryCompere}"
+            //    : $"Not all employee annual salaries are above {annualSalaryCompere}");
 
 
 
@@ -413,10 +413,20 @@ namespace ThePretendCompanyApplication
              * a given condition or not. If any of the elements satisfy the given condition,
              * then it returns true else returns false. It is also used to check whether 
              * a collection contains some*/
-            bool isTrueAny = employees.Any(e => e.AnnualSalary >= annualSalaryCompere);
-            Console.WriteLine(isTrueAny ? $"At least a salary is equals or greater to {annualSalaryCompere}" 
-                : $"None of the salaries are below than {annualSalaryCompere}");
+            //bool isTrueAny = employees.Any(e => e.AnnualSalary >= annualSalaryCompere);
+            //Console.WriteLine(isTrueAny ? $"At least a salary is equals or greater to {annualSalaryCompere}" 
+            //    : $"None of the salaries are below than {annualSalaryCompere}");
 
+
+            //The contains method
+            //we want to be able to assest whether an employee record exists within
+            //our collection of employees
+
+            var employee = employees.FirstOrDefault(em => em.Id == 50);
+
+            bool constainsEmployee = employee != null && employees.Contains(employee);
+
+            Console.WriteLine(constainsEmployee ? $"The employee exists its name is: {employee.FirstName}" : "The employee does not exist");
         }
     }
 }
