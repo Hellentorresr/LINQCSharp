@@ -431,7 +431,7 @@ namespace ThePretendCompanyApplication
 
 
             //  >> Filter Operators OfType and Where <<
-            ArrayList mixedCollection = Data.GetHeterogeneousDataCollection();
+            //    ArrayList mixedCollection = Data.GetHeterogeneousDataCollection();
 
             //OfType
             //var stringResult = from s in mixedCollection.OfType<string>()
@@ -459,8 +459,89 @@ namespace ThePretendCompanyApplication
             /*              >>> Element Operators <<<           */
             //1. ElementAt: Returns an element present within a specific index in a collection
             // Or Error: 'Index was out of range. 
-            var employee = employees.ElementAt(8);
-            Console.WriteLine($"Name: {employee.FirstName}");
+            //var employee = employees.ElementAt(8);
+            //Console.WriteLine($"Name: {employee.FirstName}");
+
+            //2. ElementAtOrDefault: Same as ElementAt except of the fact that it also returns
+            //a default value in case the specific index is out of range
+            //var department = departments.ElementAtOrDefault(1);
+            ////  Console.WriteLine($"Department name: {department.LongName}");
+            //Console.WriteLine(department is null ? "The index does not exist in the list"
+            //    : $"Department name: {department.LongName}");
+
+            // fizzBuzz(15);
+
+            //var s = new NotesStore();
+            //s.AddNote("active","name");
+            //s.AddNote("active", "second");
+            //s.AddNote("completed", "third");
+            //s.AddNote("active", "Second grade");
+
+            //var list = s.GetNotes("active");
+
+            ////Console.WriteLine(list.Find(e => e == "name"));
+
+            //foreach (var item in list) Console.WriteLine(item);
+
+         
+        }
+
+         static void FizzBuzz(int n)
+         {
+                for (int i = 1; i <= n; i++)
+                {
+                    if (i % 3 == 0 && i % 5 == 0) Console.WriteLine("FizzBuzz");
+                    if (i % 3 == 0 && i % 5 != 0) Console.WriteLine("Fizz");
+                    if (i % 5 == 0 && i % 3 != 0) Console.WriteLine("Buzz");
+                    if (i % 3 != 0 && i % 5 != 0) Console.WriteLine(i);
+                }
+         }
+    }
+
+    public class NotesStore
+    {
+        private readonly Dictionary<string, List<string>> notesByState;
+        private readonly string[] validStates = { "completed", "active", "others" };
+
+        public NotesStore()
+        {
+            notesByState = new Dictionary<string, List<string>>();
+        }
+
+        public void AddNote(string state, string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Name cannot be empty");
+            }
+
+            if (string.IsNullOrEmpty(state) || Array.IndexOf(validStates, state.ToLower()) == -1)
+            {
+                throw new ArgumentException($"Invalid state: {state}");
+            }
+
+            state = state.ToLower();
+
+            if (!notesByState.ContainsKey(state))
+            {
+                notesByState[state] = new List<string>();
+            }
+
+            notesByState[state].Add(name);
+        }
+
+        public List<string> GetNotes(string state)
+        {
+            state = state.ToLower();
+
+            if (!notesByState.ContainsKey(state))
+            {
+                throw new ArgumentException($"Invalid state: {state}");
+            }
+            else
+            {
+                return notesByState[state].ToList();
+            }
         }
     }
 }
