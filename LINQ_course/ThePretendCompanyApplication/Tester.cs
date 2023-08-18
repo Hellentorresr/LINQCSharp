@@ -693,9 +693,13 @@ namespace ThePretendCompanyApplication
             //Console.WriteLine($"Number of Employees (Technology Department): {totalEmployees}");
 
 
-            //          >>  Sum aggregate operator  Calculate total(sum) value of the collection
-            decimal totalAnnualSalaries = employeeList.Sum(sal => sal.AnnualSalary);
-            Console.WriteLine($"Total Annual Salaries: {totalAnnualSalaries}");
+            //          >>  Sum aggregate operator:  Calculate total(sum) value of the collection
+            //decimal totalAnnualSalaries = employeeList.Sum(sal => sal.AnnualSalary);
+            //Console.WriteLine($"Total Annual Salaries: {totalAnnualSalaries}");
+
+            //          >>  Max aggregate operator:  Finds the largest value in the collection.
+            decimal highesAnnualSal = employeeList.Max(sal => sal.AnnualSalary);
+            Console.WriteLine($"Highest Annual Salary: {highesAnnualSal}");
         }
     }
 }
