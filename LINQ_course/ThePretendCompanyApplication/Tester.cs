@@ -359,11 +359,11 @@ namespace ThePretendCompanyApplication
             //      The grouping operators
             //Group by
             //query the employees collection and group the result by the departmentId propery
-           // var result = from emp in employees
-                   //     group emp by emp.DepartmentId;
+            // var result = from emp in employees
+            //     group emp by emp.DepartmentId;
 
             //Using method sintax
-           // var groupResult = employees.GroupBy(emp => emp.DepartmentId);
+            // var groupResult = employees.GroupBy(emp => emp.DepartmentId);
 
 
             //foreach (var empGroup in groupResult)
@@ -473,7 +473,7 @@ namespace ThePretendCompanyApplication
             //Default value from a specific data type: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values
 
             //LINQ FirstorDefault, Last, LastOrDefault Operators (Method)
-            List<int> integerList = new() {3, 15, 23, 17, 29, 89};
+            //   List<int> integerList = new() {3, 15, 23, 17, 29, 89};
 
             //Returns the first element in a sequence that satisfies a specified condition
             // int result = integerList.First(); without any condi, returns the first elem
@@ -487,11 +487,22 @@ namespace ThePretendCompanyApplication
 
             //when no items in the collection satisfy the given condition this method wont throw an exception
             //but will rather return the default value of the relevant data type in this case 0 cause its integer type
-            int number = integerList.FirstOrDefault(e => e % 2 == 0);
-            if (number != 0) Console.WriteLine(number);
-            else Console.WriteLine("There are no even numbers in the collection");
+            //int number = integerList.FirstOrDefault(e => e % 2 == 0);
+            //if (number != 0) Console.WriteLine(number);
+            //else Console.WriteLine("There are no even numbers in the collection");
 
-           
+            //           >> Last Operator <<
+            /*The LINQ Last Method in C# is used to return the last element from a data source or from a 
+             * collection. If the data source or collection is empty, or if we specified a condition and with 
+             * that condition, no matching element is found in the data source, then the LINQ Last method will 
+             * throw an InvalidOperationException.*/
+            List<int> integerList = new() { 3, 15, 23, 22, 26, 89 };
+            //int lastElement = integerList.Last();
+           // int lastElement = integerList.Last(e => e % 2 == 0);//26 trying to find the last elem that satisfy the cond
+           // Console.WriteLine(lastElement);
+
+            int last = integerList.LastOrDefault(e => e == 50);
+            Console.WriteLine(last);//without any exception, but returns 0
 
 
             #region solvingProblem
