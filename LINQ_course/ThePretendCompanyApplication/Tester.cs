@@ -496,14 +496,27 @@ namespace ThePretendCompanyApplication
              * collection. If the data source or collection is empty, or if we specified a condition and with 
              * that condition, no matching element is found in the data source, then the LINQ Last method will 
              * throw an InvalidOperationException.*/
-            List<int> integerList = new() { 3, 15, 23, 22, 26, 89 };
+            List<int> integerList = new() { 3, 15, 23, 22, 22, 89 };
             //int lastElement = integerList.Last();
-           // int lastElement = integerList.Last(e => e % 2 == 0);//26 trying to find the last elem that satisfy the cond
-           // Console.WriteLine(lastElement);
+            // int lastElement = integerList.Last(e => e % 2 == 0);//26 trying to find the last elem that satisfy the cond
+            // Console.WriteLine(lastElement);
 
-            int last = integerList.LastOrDefault(e => e == 50);
-            Console.WriteLine(last);//without any exception, but returns 0
+            //   int last = integerList.LastOrDefault(e => e == 50);
+            //  Console.WriteLine(last);//without any exception, but returns 0
 
+            //The single operator is used to return the single element of the collection or sequence. Or it returns
+            //the single element which specifies the given condition. IF we dont pass any condtion to this method
+            //and there is more than one element or zero element in the collection an invalid operation exception
+            //will be throw
+            // int single = integerList.Single();// ERROR
+            //   int single = integerList.Single(e => e == 89);
+            // Console.WriteLine(single);
+
+            //Single or default
+            //   int singleOrDe = integerList.SingleOrDefault();//System.InvalidOperationException:Sequence contains more than one element
+
+
+            Console.WriteLine(singleOrDe);
 
             #region solvingProblem
             //NOT NEEDED ANYMORE
