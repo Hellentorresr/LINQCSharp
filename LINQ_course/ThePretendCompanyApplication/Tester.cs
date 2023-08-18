@@ -709,12 +709,22 @@ namespace ThePretendCompanyApplication
             //Console.WriteLine(newList.ElementAt(0)); //elementAt to check if the collection is  empty, returns the default vaue of 0
 
             //now testing this method with a list
-            List<Employee> employees = new ();
-            var newList = employees.DefaultIfEmpty(new Employee { Id = 0});
-            var result = newList.ElementAt(0);
+            //List<Employee> employees = new ();
+            //var newList = employees.DefaultIfEmpty(new Employee { Id = 0});
+            //var result = newList.ElementAt(0);
 
-            if(result.Id == 0) Console.WriteLine("The list is empty"); 
-           
+            //if(result.Id == 0) Console.WriteLine("The list is empty"); 
+
+            // The Empty operator: 	Returns an empty sequence of values and is the most simplest generational operator
+            //we can use this method to generate a new empty collection
+            //The empty method is not an extension method of IEnumerable or IQueryble like other linq methods
+            //it is a static method included in the Enumerable class
+            //  IEnumerable<Employee> emptyEmployeeList = Enumerable.Empty<Employee>(); but i have to cast it to a list because this IEnumerable does not come with CRUD methods
+            List<Employee> emptyEmployeeList = Enumerable.Empty<Employee>().ToList();
+
+            emptyEmployeeList.Add(new Employee { Id = 7, FirstName = "Dan", LastName = "Brown" });
+
+            foreach (var item in emptyEmployeeList) Console.WriteLine($"{item.FirstName} {item.LastName}");
         }
     }
 }
