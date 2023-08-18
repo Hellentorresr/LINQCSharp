@@ -664,15 +664,26 @@ namespace ThePretendCompanyApplication
             //Console.WriteLine(avarageSalary);
 
             //returning a string
-            string data = employeeList.Aggregate("Employee annual salaries: (Including bunus): ", (str, empl) =>
-            {
-                decimal bonus = (empl.IsManager) ? 0.04m : 0.02m;
-                return str += $"{empl.FirstName}{empl.LastName} - {empl.AnnualSalary + (empl.AnnualSalary * bonus)}, ";
+            //string data = employeeList.Aggregate("Employee annual salaries: (Including bunus): ", (str, empl) =>
+            //{
+            //    decimal bonus = (empl.IsManager) ? 0.04m : 0.02m;
+            //    return str += $"{empl.FirstName}{empl.LastName} - {empl.AnnualSalary + (empl.AnnualSalary * bonus)}, ";
 
-            }, s => s[..^2]     //once the string is return this slice notation is excluding the last two characters
-            );
+            //}, s => s[..^2]     //once the string is return this slice notation is excluding the last two characters
+            //);
 
-            Console.WriteLine(data);
+            //Console.WriteLine(data);
+
+            //           >> Avarage aggregate operator <<
+            //Calculates the average of the numeric items in the collection
+            decimal avgSalary = employeeList.Average(emp => emp.AnnualSalary);
+            Console.WriteLine($"Average annual salary: {avgSalary}");
+
+            //Calculate the average salary for all employees in the technology department
+            //method chaining
+            decimal avgSalaryTechDep = employeeList.Where(e => e.DepartmentId == 1).Average(emp => emp.AnnualSalary);
+
+            Console.WriteLine($"Average Annual Salary (Technology Department): {avgSalaryTechDep}");
         }
     }
 }
