@@ -698,8 +698,23 @@ namespace ThePretendCompanyApplication
             //Console.WriteLine($"Total Annual Salaries: {totalAnnualSalaries}");
 
             //          >>  Max aggregate operator:  Finds the largest value in the collection.
-            decimal highesAnnualSal = employeeList.Max(sal => sal.AnnualSalary);
-            Console.WriteLine($"Highest Annual Salary: {highesAnnualSal}");
+            //decimal highesAnnualSal = employeeList.Max(sal => sal.AnnualSalary);
+            //Console.WriteLine($"Highest Annual Salary: {highesAnnualSal}");
+
+            //          >> Generation Operators - DefaultIfEmpty, Empty, Range, Repeat <<
+            //1. DefaultIfEmpty: When applied to an empty sequence, generate a default element within a sequence
+            //we can use this operator to return a new IEnumerable collection 
+            //List<int> intList = new();
+            //var newList = intList.DefaultIfEmpty();
+            //Console.WriteLine(newList.ElementAt(0)); //elementAt to check if the collection is  empty, returns the default vaue of 0
+
+            //now testing this method with a list
+            List<Employee> employees = new ();
+            var newList = employees.DefaultIfEmpty(new Employee { Id = 0});
+            var result = newList.ElementAt(0);
+
+            if(result.Id == 0) Console.WriteLine("The list is empty"); 
+           
         }
     }
 }
