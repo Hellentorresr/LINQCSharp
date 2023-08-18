@@ -359,11 +359,11 @@ namespace ThePretendCompanyApplication
             //      The grouping operators
             //Group by
             //query the employees collection and group the result by the departmentId propery
-            var result = from emp in employees
-                         group emp by emp.DepartmentId;
+           // var result = from emp in employees
+                   //     group emp by emp.DepartmentId;
 
             //Using method sintax
-            var groupResult = employees.GroupBy(emp => emp.DepartmentId);
+           // var groupResult = employees.GroupBy(emp => emp.DepartmentId);
 
 
             //foreach (var empGroup in groupResult)
@@ -469,6 +469,33 @@ namespace ThePretendCompanyApplication
             //Console.WriteLine(department is null ? "The index does not exist in the list"
             //    : $"Department name: {department.LongName}");
 
+
+            //Default value from a specific data type: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values
+
+            //LINQ FirstorDefault, Last, LastOrDefault Operators (Method)
+            List<int> integerList = new() {3, 15, 23, 17, 29, 89};
+
+            //Returns the first element in a sequence that satisfies a specified condition
+            // int result = integerList.First(); without any condi, returns the first elem
+            //or an error
+
+            // int result = integerList.First(e => e % 2 == 0); //14
+
+            //If we don't want to get the error "InvalidOperationException" when First() does not find matches
+            //we can use: Use the FirstorDefault() method to return the first element of a sequence or a default
+            //value if element isn't there.
+
+            //when no items in the collection satisfy the given condition this method wont throw an exception
+            //but will rather return the default value of the relevant data type in this case 0 cause its integer type
+            int number = integerList.FirstOrDefault(e => e % 2 == 0);
+            if (number != 0) Console.WriteLine(number);
+            else Console.WriteLine("There are no even numbers in the collection");
+
+           
+
+
+            #region solvingProblem
+            //NOT NEEDED ANYMORE
             // fizzBuzz(15);
 
             //var s = new NotesStore();
@@ -483,10 +510,10 @@ namespace ThePretendCompanyApplication
 
             //foreach (var item in list) Console.WriteLine(item);
 
-         
+            #endregion solvingProblem
         }
 
-         static void FizzBuzz(int n)
+        static void FizzBuzz(int n)
          {
                 for (int i = 1; i <= n; i++)
                 {
