@@ -598,28 +598,44 @@ namespace ThePretendCompanyApplication
         public static void Main() 
         {
             //  Transforming data using LINQ's queries
-            List<Employee> employeeList = Data.GetEmployees();
-            List<Department> departmentList = Data.GetDepartments();
+           List<Employee> employeeList = Data.GetEmployees();
+           List<Department> departmentList = Data.GetDepartments();
 
             //equality operator 
             //SequenceEquals
             //Use case: we want to compare to lists of data and we want to know if these tho lists contains elements
             // of equal value and each ele of the relevant list are stored in the same order
-            var integerList = new List<int>() { 1, 2, 3, 4, 5, 6 };
-            var integerListTwo = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            //var integerList = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            //var integerListTwo = new List<int>() { 1, 2, 3, 4, 5, 6 };
 
-            var boolSequenceEqual = integerList.SequenceEqual(integerListTwo);
-          //  Console.WriteLine(boolSequenceEqual);// returns True
+            //var boolSequenceEqual = integerList.SequenceEqual(integerListTwo);
+            //  Console.WriteLine(boolSequenceEqual);// returns True
 
             //now using our own datatype
             //var employeeListCompare = Data.GetEmployees();
             //bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
-           // Console.WriteLine(boolEmp);//false, because we need to tell the compiler how to stablish equality between objects
+            // Console.WriteLine(boolEmp);//false, because we need to tell the compiler how to stablish equality between objects
 
             //now using our method to compare
-            var employeeListCompare = Data.GetEmployees();
-            bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
-            Console.WriteLine(boolEmp); //true
+            //var employeeListCompare = Data.GetEmployees();
+            //bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
+            //Console.WriteLine(boolEmp); //true
+
+
+            //          >> The concatenation operator <<
+            //Concat
+            var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            var integerList2 = new List<int>() { 6, 7, 8, 9, 10};
+
+            IEnumerable<int> integerListConcat = integerList.Concat(integerList2);  
+            foreach (var integer in integerListConcat)Console.WriteLine(integer);
+
+            //another example
+            List<Employee> employeesList2 = new() { new Employee { Id = 6, FirstName = "Hellen", LastName = "Torres", AnnualSalary = 10000, IsManager = true, DepartmentId = 3 } };
+
+           var UpdatingEmpList = employeeList.Concat(employeesList2);
+
+            foreach (var ele in UpdatingEmpList) Console.WriteLine(ele.FirstName);
 
         }
     }
