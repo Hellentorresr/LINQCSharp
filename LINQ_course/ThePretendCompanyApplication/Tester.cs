@@ -676,14 +676,21 @@ namespace ThePretendCompanyApplication
 
             //           >> Avarage aggregate operator <<
             //Calculates the average of the numeric items in the collection
-            decimal avgSalary = employeeList.Average(emp => emp.AnnualSalary);
-            Console.WriteLine($"Average annual salary: {avgSalary}");
+            //decimal avgSalary = employeeList.Average(emp => emp.AnnualSalary);
+            //Console.WriteLine($"Average annual salary: {avgSalary}");
 
             //Calculate the average salary for all employees in the technology department
             //method chaining
-            decimal avgSalaryTechDep = employeeList.Where(e => e.DepartmentId == 1).Average(emp => emp.AnnualSalary);
+            //decimal avgSalaryTechDep = employeeList.Where(e => e.DepartmentId == 1).Average(emp => emp.AnnualSalary);
+            //Console.WriteLine($"Average Annual Salary (Technology Department): {avgSalaryTechDep}");
 
-            Console.WriteLine($"Average Annual Salary (Technology Department): {avgSalaryTechDep}");
+            //Count operator, counting how many employees we have in the collection of employees
+           // int totalEmployees = employeeList.Count();
+           // Console.WriteLine(totalEmployees);
+
+            //Count with a condition
+            int totalEmployees = employeeList.Count(e => e.DepartmentId == 3);
+            Console.WriteLine($"Number of Employees (Technology Department): {totalEmployees}");
         }
     }
 }
