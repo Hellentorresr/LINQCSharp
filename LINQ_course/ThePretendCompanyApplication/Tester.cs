@@ -647,15 +647,21 @@ namespace ThePretendCompanyApplication
             //salary bunes in the final results
             // the Aggregate function takes an initial value for the accumulator (0 in this case),
             //and a lambda function that defines how the accumulation should occur
-            decimal totalAnnualSalary = employeeList.Aggregate<Employee, decimal>(0, (accumulator, employeeObj) =>
-            {
-                var bonus = (employeeObj.IsManager) ? 0.04m : 0.02m;
+            //decimal totalAnnualSalary = employeeList.Aggregate<Employee, decimal>(0, (accumulator, employeeObj) =>
+            //{
+            //    var bonus = (employeeObj.IsManager) ? 0.04m : 0.02m;
 
-                // Calculate the annual salary with the bonus and add it to the running total
-                return accumulator + (employeeObj.AnnualSalary + (employeeObj.AnnualSalary * bonus));
-            });
+            //    // Calculate the annual salary with the bonus and add it to the running total
+            //    return accumulator + (employeeObj.AnnualSalary + (employeeObj.AnnualSalary * bonus));
+            //});
 
-            Console.WriteLine($"Total Annual Salary of all employees (including bonus): {totalAnnualSalary}");
+            //Console.WriteLine($"Total Annual Salary of all employees (including bonus): {totalAnnualSalary}");
+
+
+            //Avarage operator: is used to calculate the average of numeric values from the collection on which it is applied.
+            //This Average method can return nullable or non-nullable decimal, float, or double values.
+            decimal avarageSalary = employeeList.Average(s => s.AnnualSalary);
+            Console.WriteLine(avarageSalary);
         }
     }
 }
