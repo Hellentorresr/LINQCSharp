@@ -660,8 +660,19 @@ namespace ThePretendCompanyApplication
 
             //Avarage operator: is used to calculate the average of numeric values from the collection on which it is applied.
             //This Average method can return nullable or non-nullable decimal, float, or double values.
-            decimal avarageSalary = employeeList.Average(s => s.AnnualSalary);
-            Console.WriteLine(avarageSalary);
+            //decimal avarageSalary = employeeList.Average(s => s.AnnualSalary);
+            //Console.WriteLine(avarageSalary);
+
+            //returning a string
+            string data = employeeList.Aggregate("Employee annual salaries: (Including bunus): ", (str, empl) =>
+            {
+                decimal bonus = (empl.IsManager) ? 0.04m : 0.02m;
+                return str += $"{empl.FirstName}{empl.LastName} - {empl.AnnualSalary + (empl.AnnualSalary * bonus)}, ";
+
+            }, s => s[..^2]     //once the string is return this slice notation is excluding the last two characters
+            );
+
+            Console.WriteLine(data);
         }
     }
 }
