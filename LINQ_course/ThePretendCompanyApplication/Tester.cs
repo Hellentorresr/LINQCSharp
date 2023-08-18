@@ -685,12 +685,17 @@ namespace ThePretendCompanyApplication
             //Console.WriteLine($"Average Annual Salary (Technology Department): {avgSalaryTechDep}");
 
             //Count operator, counting how many employees we have in the collection of employees
-           // int totalEmployees = employeeList.Count();
-           // Console.WriteLine(totalEmployees);
+            // int totalEmployees = employeeList.Count();
+            // Console.WriteLine(totalEmployees);
 
             //Count with a condition
-            int totalEmployees = employeeList.Count(e => e.DepartmentId == 3);
-            Console.WriteLine($"Number of Employees (Technology Department): {totalEmployees}");
+            //int totalEmployees = employeeList.Count(e => e.DepartmentId == 3);
+            //Console.WriteLine($"Number of Employees (Technology Department): {totalEmployees}");
+
+
+            //          >>  Sum aggregate operator  Calculate total(sum) value of the collection
+            decimal totalAnnualSalaries = employeeList.Sum(sal => sal.AnnualSalary);
+            Console.WriteLine($"Total Annual Salaries: {totalAnnualSalaries}");
         }
     }
 }
