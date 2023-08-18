@@ -276,323 +276,351 @@ namespace ThePretendCompanyApplication
 
 
     //Part 3 Operators
-    public class Tester
+    //  public class Tester
+    //{
+    // public static void Main()
+    //   {
+    //Learning about Sorting operators
+    //1. OrderBy
+    //     List<Employee> employees = Data.GetEmployees();
+    //     List<Department> departments = Data.GetDepartments();
+
+    //Let's get all the records from the employees List and order
+    //by deparment id, and adding the department name within the output
+
+    //First coding the query using method syntax
+    //OrderBy sort in ascending order by default 1 2 3 
+    //var result = employees.Join(departments,
+    //    emp => emp.DepartmentId,
+    //    dep => dep.Id,
+    //        (empl, dept) => new
+    //        {
+    //            FullName = empl.FirstName + " " + empl.LastName,
+    //            employeeDept = dept.Id,
+    //            departLongName = dept.LongName
+    //        }
+    //    ).OrderBy(id => id.employeeDept);
+
+    //First coding the query using method syntax
+    //OrderByDescending 3 2 1
+    //var result = employees.Join(departments,
+    //    emp => emp.DepartmentId,
+    //    dep => dep.Id,
+    //        (empl, dept) => new
+    //        {
+    //            FullName = empl.FirstName + " " + empl.LastName,
+    //            employeeDept = dept.Id,
+    //            departLongName = dept.LongName
+    //        }
+    //    ).OrderByDescending(id => id.employeeDept);
+
+    //Now sorting by department id and the by the annual salary property in ascending order
+    //var result = employees.Join(departments,
+    //   emp => emp.DepartmentId,
+    //   dep => dep.Id,
+    //       (empl, dept) => new
+    //       {
+    //           FullName = empl.FirstName + " " + empl.LastName,
+    //           employeeDept = dept.Id,
+    //           departLongName = dept.LongName,
+    //           empl.AnnualSalary
+    //       }
+    //   ).OrderBy(id => id.employeeDept).ThenBy(sal => sal.AnnualSalary);
+
+    //The same query but using query syntax
+    //var result = from emp in employees
+    //             join dep in departments
+    //             on emp.DepartmentId equals dep.Id
+    //             orderby emp.DepartmentId, emp.AnnualSalary
+    //             select new
+    //             {
+    //                 FullName = emp.FirstName + " " + emp.LastName,
+    //                 employeeDept = dep.Id,
+    //                 departLongName = dep.LongName,
+    //                 emp.AnnualSalary
+    //             };
+
+
+    //var result = (from emp in employees
+    //              join dep in departments
+    //              on emp.DepartmentId equals dep.Id
+    //              select new
+    //              {
+    //                  FullName = emp.FirstName + " " + emp.LastName,
+    //                  employeeDept = dep.Id,
+    //                  departLongName = dep.LongName,
+    //                  emp.AnnualSalary
+    //              }).OrderBy(sal => sal.AnnualSalary);
+
+    // foreach (var item in result) Console.WriteLine(item);
+
+
+
+    //      The grouping operators
+    //Group by
+    //query the employees collection and group the result by the departmentId propery
+    // var result = from emp in employees
+    //     group emp by emp.DepartmentId;
+
+    //Using method sintax
+    // var groupResult = employees.GroupBy(emp => emp.DepartmentId);
+
+
+    //foreach (var empGroup in groupResult)
+    //{
+    //    Console.WriteLine($"Department Id: {empGroup.Key}");
+
+    //    foreach (Employee emp in empGroup)
+    //    {
+    //        Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
+    //    }
+    //}
+
+    //we have to end all of our queries using query syntax either with
+    //the select operator or a group operator 
+
+    //ToLookup method-- works exactly the same way as GroupBy(its execution is deferred)
+    //But the difference is that the execution of this query is immediately
+    //var groupResult_ = employees.ToLookup(emp => emp.DepartmentId);
+
+    //foreach (var empGroup in groupResult_)
+    //{
+    //    Console.WriteLine($"Department Id: {empGroup.Key}");
+
+    //    foreach (Employee emp in empGroup)
+    //    {
+    //        Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
+    //    }
+    //}
+
+
+
+    //Quantifier operators -- All Any Contains
+
+    /*The LINQ All Method is used to check whether all the elements of a data 
+     * source satisfy a given condition or not. If all the elements satisfy the given 
+     * condition, then it returns true else returns false.*/
+    //var annualSalaryCompere = 20000;
+
+    //bool isTrueAll = employees.All(e => e.AnnualSalary > annualSalaryCompere);
+
+    //Console.WriteLine(isTrueAll ? $"All employee annual salaries are above {annualSalaryCompere}"
+    //    : $"Not all employee annual salaries are above {annualSalaryCompere}");
+
+
+
+    //the Any LINQ method
+    /*is used to check whether at least one of the elements of a data source satisfies 
+     * a given condition or not. If any of the elements satisfy the given condition,
+     * then it returns true else returns false. It is also used to check whether 
+     * a collection contains some*/
+    //bool isTrueAny = employees.Any(e => e.AnnualSalary >= annualSalaryCompere);
+    //Console.WriteLine(isTrueAny ? $"At least a salary is equals or greater to {annualSalaryCompere}" 
+    //    : $"None of the salaries are below than {annualSalaryCompere}");
+
+
+    //The contains method
+    //we want to be able to assest whether an employee record exists within
+    //our collection of employees
+
+    //var employee = employees.FirstOrDefault(em => em.Id == 50);
+
+    //bool constainsEmployee = employee != null && employees.Contains(employee);
+
+    //Console.WriteLine(constainsEmployee ? $"The employee exists its name is: {employee.FirstName}" : "The employee does not exist");
+
+
+    //  >> Filter Operators OfType and Where <<
+    //    ArrayList mixedCollection = Data.GetHeterogeneousDataCollection();
+
+    //OfType
+    //var stringResult = from s in mixedCollection.OfType<string>()
+    //                   select s;
+
+    //foreach ( var mixed in stringResult) Console.WriteLine(mixed);
+
+    //Now let's query all interger values in our ArrayList
+    //var listOfIntegers = from integerVals in mixedCollection.OfType<int>()
+    //                     select integerVals;
+
+    //foreach (var ints in listOfIntegers) Console.WriteLine(ints);
+
+    //var listOfEmp = from objs in mixedCollection.OfType<Employee>()
+    //                    select objs;
+
+    //foreach(var obj in listOfEmp) Console.WriteLine($"Name: {obj.FirstName}");
+
+    //var listOfDepart = from obj in mixedCollection.OfType<Department>()
+    //                   select obj;
+
+    //foreach (var dep in listOfDepart) Console.WriteLine($"Department name: {dep.LongName}");
+
+
+    /*              >>> Element Operators <<<           */
+    //1. ElementAt: Returns an element present within a specific index in a collection
+    // Or Error: 'Index was out of range. 
+    //var employee = employees.ElementAt(8);
+    //Console.WriteLine($"Name: {employee.FirstName}");
+
+    //2. ElementAtOrDefault: Same as ElementAt except of the fact that it also returns
+    //a default value in case the specific index is out of range
+    //var department = departments.ElementAtOrDefault(1);
+    ////  Console.WriteLine($"Department name: {department.LongName}");
+    //Console.WriteLine(department is null ? "The index does not exist in the list"
+    //    : $"Department name: {department.LongName}");
+
+
+    //Default value from a specific data type: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values
+
+    //LINQ FirstorDefault, Last, LastOrDefault Operators (Method)
+    //   List<int> integerList = new() {3, 15, 23, 17, 29, 89};
+
+    //Returns the first element in a sequence that satisfies a specified condition
+    // int result = integerList.First(); without any condi, returns the first elem
+    //or an error
+
+    // int result = integerList.First(e => e % 2 == 0); //14
+
+    //If we don't want to get the error "InvalidOperationException" when First() does not find matches
+    //we can use: Use the FirstorDefault() method to return the first element of a sequence or a default
+    //value if element isn't there.
+
+    //when no items in the collection satisfy the given condition this method wont throw an exception
+    //but will rather return the default value of the relevant data type in this case 0 cause its integer type
+    //int number = integerList.FirstOrDefault(e => e % 2 == 0);
+    //if (number != 0) Console.WriteLine(number);
+    //else Console.WriteLine("There are no even numbers in the collection");
+
+    //           >> Last Operator <<
+    /*The LINQ Last Method in C# is used to return the last element from a data source or from a 
+     * collection. If the data source or collection is empty, or if we specified a condition and with 
+     * that condition, no matching element is found in the data source, then the LINQ Last method will 
+     * throw an InvalidOperationException.*/
+    // List<int> integerList = new() { 3, 15, 23, 22, 22, 89 };
+    //int lastElement = integerList.Last();
+    // int lastElement = integerList.Last(e => e % 2 == 0);//26 trying to find the last elem that satisfy the cond
+    // Console.WriteLine(lastElement);
+
+    //   int last = integerList.LastOrDefault(e => e == 50);
+    //  Console.WriteLine(last);//without any exception, but returns 0
+
+    //The single operator is used to return the single element of the collection or sequence. Or it returns
+    //the single element which specifies the given condition. IF we dont pass any condtion to this method
+    //and there is more than one element or zero element in the collection an invalid operation exception
+    //will be throw
+    // int single = integerList.Single();// ERROR
+    //   int single = integerList.Single(e => e == 89);
+    // Console.WriteLine(single);
+
+    //Single or default
+    //   int singleOrDe = integerList.SingleOrDefault();//System.InvalidOperationException:Sequence contains more than one element
+    #region solvingProblem
+    //NOT NEEDED ANYMORE
+    // fizzBuzz(15);
+
+    //var s = new NotesStore();
+    //s.AddNote("active","name");
+    //s.AddNote("active", "second");
+    //s.AddNote("completed", "third");
+    //s.AddNote("active", "Second grade");
+
+    //var list = s.GetNotes("active");
+
+    ////Console.WriteLine(list.Find(e => e == "name"));
+
+    //foreach (var item in list) Console.WriteLine(item);
+
+    #endregion solvingProblem
+    //  }
+
+    //static void FizzBuzz(int n)
+    // {
+    //        for (int i = 1; i <= n; i++)
+    //        {
+    //            if (i % 3 == 0 && i % 5 == 0) Console.WriteLine("FizzBuzz");
+    //            if (i % 3 == 0 && i % 5 != 0) Console.WriteLine("Fizz");
+    //            if (i % 5 == 0 && i % 3 != 0) Console.WriteLine("Buzz");
+    //            if (i % 3 != 0 && i % 5 != 0) Console.WriteLine(i);
+    //        }
+    // }
+    // }
+
+    //public class NotesStore
+    //{
+    //    private readonly Dictionary<string, List<string>> notesByState;
+    //    private readonly string[] validStates = { "completed", "active", "others" };
+
+    //    public NotesStore()
+    //    {
+    //        notesByState = new Dictionary<string, List<string>>();
+    //    }
+
+    //    public void AddNote(string state, string name)
+    //    {
+    //        if (string.IsNullOrEmpty(name))
+    //        {
+    //            throw new ArgumentException("Name cannot be empty");
+    //        }
+
+    //        if (string.IsNullOrEmpty(state) || Array.IndexOf(validStates, state.ToLower()) == -1)
+    //        {
+    //            throw new ArgumentException($"Invalid state: {state}");
+    //        }
+
+    //        state = state.ToLower();
+
+    //        if (!notesByState.ContainsKey(state))
+    //        {
+    //            notesByState[state] = new List<string>();
+    //        }
+
+    //        notesByState[state].Add(name);
+    //    }
+
+    //    public List<string> GetNotes(string state)
+    //    {
+    //        state = state.ToLower();
+
+    //        if (!notesByState.ContainsKey(state))
+    //        {
+    //            throw new ArgumentException($"Invalid state: {state}");
+    //        }
+    //        else
+    //        {
+    //            return notesByState[state].ToList();
+    //        }
+    //    }
+    //}
+
+    /* Part 4  More LINQ Operators*/
+    public class Test
     {
-        public static void Main()
+        public static void Main() 
         {
-            //Learning about Sorting operators
-            //1. OrderBy
-            List<Employee> employees = Data.GetEmployees();
-            List<Department> departments = Data.GetDepartments();
+            //  Transforming data using LINQ's queries
+            List<Employee> employeeList = Data.GetEmployees();
+            List<Department> departmentList = Data.GetDepartments();
+
+            //equality operator 
+            //SequenceEquals
+            //Use case: we want to compare to lists of data and we want to know if these tho lists contains elements
+            // of equal value and each ele of the relevant list are stored in the same order
+            var integerList = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            var integerListTwo = new List<int>() { 1, 2, 3, 4, 5, 6 };
+
+            var boolSequenceEqual = integerList.SequenceEqual(integerListTwo);
+          //  Console.WriteLine(boolSequenceEqual);// returns True
+
+            //now using our own datatype
+            //var employeeListCompare = Data.GetEmployees();
+            //bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
+           // Console.WriteLine(boolEmp);//false, because we need to tell the compiler how to stablish equality between objects
+
+            //now using our method to compare
+            var employeeListCompare = Data.GetEmployees();
+            bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
+            Console.WriteLine(boolEmp); //true
 
-            //Let's get all the records from the employees List and order
-            //by deparment id, and adding the department name within the output
-
-            //First coding the query using method syntax
-            //OrderBy sort in ascending order by default 1 2 3 
-            //var result = employees.Join(departments,
-            //    emp => emp.DepartmentId,
-            //    dep => dep.Id,
-            //        (empl, dept) => new
-            //        {
-            //            FullName = empl.FirstName + " " + empl.LastName,
-            //            employeeDept = dept.Id,
-            //            departLongName = dept.LongName
-            //        }
-            //    ).OrderBy(id => id.employeeDept);
-
-            //First coding the query using method syntax
-            //OrderByDescending 3 2 1
-            //var result = employees.Join(departments,
-            //    emp => emp.DepartmentId,
-            //    dep => dep.Id,
-            //        (empl, dept) => new
-            //        {
-            //            FullName = empl.FirstName + " " + empl.LastName,
-            //            employeeDept = dept.Id,
-            //            departLongName = dept.LongName
-            //        }
-            //    ).OrderByDescending(id => id.employeeDept);
-
-            //Now sorting by department id and the by the annual salary property in ascending order
-            //var result = employees.Join(departments,
-            //   emp => emp.DepartmentId,
-            //   dep => dep.Id,
-            //       (empl, dept) => new
-            //       {
-            //           FullName = empl.FirstName + " " + empl.LastName,
-            //           employeeDept = dept.Id,
-            //           departLongName = dept.LongName,
-            //           empl.AnnualSalary
-            //       }
-            //   ).OrderBy(id => id.employeeDept).ThenBy(sal => sal.AnnualSalary);
-
-            //The same query but using query syntax
-            //var result = from emp in employees
-            //             join dep in departments
-            //             on emp.DepartmentId equals dep.Id
-            //             orderby emp.DepartmentId, emp.AnnualSalary
-            //             select new
-            //             {
-            //                 FullName = emp.FirstName + " " + emp.LastName,
-            //                 employeeDept = dep.Id,
-            //                 departLongName = dep.LongName,
-            //                 emp.AnnualSalary
-            //             };
-
-
-            //var result = (from emp in employees
-            //              join dep in departments
-            //              on emp.DepartmentId equals dep.Id
-            //              select new
-            //              {
-            //                  FullName = emp.FirstName + " " + emp.LastName,
-            //                  employeeDept = dep.Id,
-            //                  departLongName = dep.LongName,
-            //                  emp.AnnualSalary
-            //              }).OrderBy(sal => sal.AnnualSalary);
-
-            // foreach (var item in result) Console.WriteLine(item);
-
-
-
-            //      The grouping operators
-            //Group by
-            //query the employees collection and group the result by the departmentId propery
-            // var result = from emp in employees
-            //     group emp by emp.DepartmentId;
-
-            //Using method sintax
-            // var groupResult = employees.GroupBy(emp => emp.DepartmentId);
-
-
-            //foreach (var empGroup in groupResult)
-            //{
-            //    Console.WriteLine($"Department Id: {empGroup.Key}");
-
-            //    foreach (Employee emp in empGroup)
-            //    {
-            //        Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
-            //    }
-            //}
-
-            //we have to end all of our queries using query syntax either with
-            //the select operator or a group operator 
-
-            //ToLookup method-- works exactly the same way as GroupBy(its execution is deferred)
-            //But the difference is that the execution of this query is immediately
-            //var groupResult_ = employees.ToLookup(emp => emp.DepartmentId);
-
-            //foreach (var empGroup in groupResult_)
-            //{
-            //    Console.WriteLine($"Department Id: {empGroup.Key}");
-
-            //    foreach (Employee emp in empGroup)
-            //    {
-            //        Console.WriteLine($"\tEmployee Fullname: {emp.FirstName} {emp.LastName}");
-            //    }
-            //}
-
-
-
-            //Quantifier operators -- All Any Contains
-
-            /*The LINQ All Method is used to check whether all the elements of a data 
-             * source satisfy a given condition or not. If all the elements satisfy the given 
-             * condition, then it returns true else returns false.*/
-            //var annualSalaryCompere = 20000;
-
-            //bool isTrueAll = employees.All(e => e.AnnualSalary > annualSalaryCompere);
-
-            //Console.WriteLine(isTrueAll ? $"All employee annual salaries are above {annualSalaryCompere}"
-            //    : $"Not all employee annual salaries are above {annualSalaryCompere}");
-
-
-
-            //the Any LINQ method
-            /*is used to check whether at least one of the elements of a data source satisfies 
-             * a given condition or not. If any of the elements satisfy the given condition,
-             * then it returns true else returns false. It is also used to check whether 
-             * a collection contains some*/
-            //bool isTrueAny = employees.Any(e => e.AnnualSalary >= annualSalaryCompere);
-            //Console.WriteLine(isTrueAny ? $"At least a salary is equals or greater to {annualSalaryCompere}" 
-            //    : $"None of the salaries are below than {annualSalaryCompere}");
-
-
-            //The contains method
-            //we want to be able to assest whether an employee record exists within
-            //our collection of employees
-
-            //var employee = employees.FirstOrDefault(em => em.Id == 50);
-
-            //bool constainsEmployee = employee != null && employees.Contains(employee);
-
-            //Console.WriteLine(constainsEmployee ? $"The employee exists its name is: {employee.FirstName}" : "The employee does not exist");
-
-
-            //  >> Filter Operators OfType and Where <<
-            //    ArrayList mixedCollection = Data.GetHeterogeneousDataCollection();
-
-            //OfType
-            //var stringResult = from s in mixedCollection.OfType<string>()
-            //                   select s;
-
-            //foreach ( var mixed in stringResult) Console.WriteLine(mixed);
-
-            //Now let's query all interger values in our ArrayList
-            //var listOfIntegers = from integerVals in mixedCollection.OfType<int>()
-            //                     select integerVals;
-
-            //foreach (var ints in listOfIntegers) Console.WriteLine(ints);
-
-            //var listOfEmp = from objs in mixedCollection.OfType<Employee>()
-            //                    select objs;
-
-            //foreach(var obj in listOfEmp) Console.WriteLine($"Name: {obj.FirstName}");
-
-            //var listOfDepart = from obj in mixedCollection.OfType<Department>()
-            //                   select obj;
-
-            //foreach (var dep in listOfDepart) Console.WriteLine($"Department name: {dep.LongName}");
-
-
-            /*              >>> Element Operators <<<           */
-            //1. ElementAt: Returns an element present within a specific index in a collection
-            // Or Error: 'Index was out of range. 
-            //var employee = employees.ElementAt(8);
-            //Console.WriteLine($"Name: {employee.FirstName}");
-
-            //2. ElementAtOrDefault: Same as ElementAt except of the fact that it also returns
-            //a default value in case the specific index is out of range
-            //var department = departments.ElementAtOrDefault(1);
-            ////  Console.WriteLine($"Department name: {department.LongName}");
-            //Console.WriteLine(department is null ? "The index does not exist in the list"
-            //    : $"Department name: {department.LongName}");
-
-
-            //Default value from a specific data type: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values
-
-            //LINQ FirstorDefault, Last, LastOrDefault Operators (Method)
-            //   List<int> integerList = new() {3, 15, 23, 17, 29, 89};
-
-            //Returns the first element in a sequence that satisfies a specified condition
-            // int result = integerList.First(); without any condi, returns the first elem
-            //or an error
-
-            // int result = integerList.First(e => e % 2 == 0); //14
-
-            //If we don't want to get the error "InvalidOperationException" when First() does not find matches
-            //we can use: Use the FirstorDefault() method to return the first element of a sequence or a default
-            //value if element isn't there.
-
-            //when no items in the collection satisfy the given condition this method wont throw an exception
-            //but will rather return the default value of the relevant data type in this case 0 cause its integer type
-            //int number = integerList.FirstOrDefault(e => e % 2 == 0);
-            //if (number != 0) Console.WriteLine(number);
-            //else Console.WriteLine("There are no even numbers in the collection");
-
-            //           >> Last Operator <<
-            /*The LINQ Last Method in C# is used to return the last element from a data source or from a 
-             * collection. If the data source or collection is empty, or if we specified a condition and with 
-             * that condition, no matching element is found in the data source, then the LINQ Last method will 
-             * throw an InvalidOperationException.*/
-            List<int> integerList = new() { 3, 15, 23, 22, 22, 89 };
-            //int lastElement = integerList.Last();
-            // int lastElement = integerList.Last(e => e % 2 == 0);//26 trying to find the last elem that satisfy the cond
-            // Console.WriteLine(lastElement);
-
-            //   int last = integerList.LastOrDefault(e => e == 50);
-            //  Console.WriteLine(last);//without any exception, but returns 0
-
-            //The single operator is used to return the single element of the collection or sequence. Or it returns
-            //the single element which specifies the given condition. IF we dont pass any condtion to this method
-            //and there is more than one element or zero element in the collection an invalid operation exception
-            //will be throw
-            // int single = integerList.Single();// ERROR
-            //   int single = integerList.Single(e => e == 89);
-            // Console.WriteLine(single);
-
-            //Single or default
-            //   int singleOrDe = integerList.SingleOrDefault();//System.InvalidOperationException:Sequence contains more than one element
-
-
-            Console.WriteLine(singleOrDe);
-
-            #region solvingProblem
-            //NOT NEEDED ANYMORE
-            // fizzBuzz(15);
-
-            //var s = new NotesStore();
-            //s.AddNote("active","name");
-            //s.AddNote("active", "second");
-            //s.AddNote("completed", "third");
-            //s.AddNote("active", "Second grade");
-
-            //var list = s.GetNotes("active");
-
-            ////Console.WriteLine(list.Find(e => e == "name"));
-
-            //foreach (var item in list) Console.WriteLine(item);
-
-            #endregion solvingProblem
-        }
-
-        static void FizzBuzz(int n)
-         {
-                for (int i = 1; i <= n; i++)
-                {
-                    if (i % 3 == 0 && i % 5 == 0) Console.WriteLine("FizzBuzz");
-                    if (i % 3 == 0 && i % 5 != 0) Console.WriteLine("Fizz");
-                    if (i % 5 == 0 && i % 3 != 0) Console.WriteLine("Buzz");
-                    if (i % 3 != 0 && i % 5 != 0) Console.WriteLine(i);
-                }
-         }
-    }
-
-    public class NotesStore
-    {
-        private readonly Dictionary<string, List<string>> notesByState;
-        private readonly string[] validStates = { "completed", "active", "others" };
-
-        public NotesStore()
-        {
-            notesByState = new Dictionary<string, List<string>>();
-        }
-
-        public void AddNote(string state, string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException("Name cannot be empty");
-            }
-
-            if (string.IsNullOrEmpty(state) || Array.IndexOf(validStates, state.ToLower()) == -1)
-            {
-                throw new ArgumentException($"Invalid state: {state}");
-            }
-
-            state = state.ToLower();
-
-            if (!notesByState.ContainsKey(state))
-            {
-                notesByState[state] = new List<string>();
-            }
-
-            notesByState[state].Add(name);
-        }
-
-        public List<string> GetNotes(string state)
-        {
-            state = state.ToLower();
-
-            if (!notesByState.ContainsKey(state))
-            {
-                throw new ArgumentException($"Invalid state: {state}");
-            }
-            else
-            {
-                return notesByState[state].ToList();
-            }
         }
     }
 }
