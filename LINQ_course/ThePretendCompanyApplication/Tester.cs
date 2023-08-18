@@ -624,19 +624,38 @@ namespace ThePretendCompanyApplication
 
             //          >> The concatenation operator <<
             //Concat
-            var integerList = new List<int>() { 1, 2, 3, 4, 5 };
-            var integerList2 = new List<int>() { 6, 7, 8, 9, 10};
+            //var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            //var integerList2 = new List<int>() { 6, 7, 8, 9, 10};
 
-            IEnumerable<int> integerListConcat = integerList.Concat(integerList2);  
-            foreach (var integer in integerListConcat)Console.WriteLine(integer);
+            //IEnumerable<int> integerListConcat = integerList.Concat(integerList2);  
+            //foreach (var integer in integerListConcat)Console.WriteLine(integer);
 
             //another example
-            List<Employee> employeesList2 = new() { new Employee { Id = 6, FirstName = "Hellen", LastName = "Torres", AnnualSalary = 10000, IsManager = true, DepartmentId = 3 } };
+            // List<Employee> employeesList2 = new() { new Employee { Id = 6, FirstName = "Hellen", LastName = "Torres", AnnualSalary = 10000, IsManager = true, DepartmentId = 3 } };
 
-           var UpdatingEmpList = employeeList.Concat(employeesList2);
+            //var UpdatingEmpList = employeeList.Concat(employeesList2);
 
-            foreach (var ele in UpdatingEmpList) Console.WriteLine(ele.FirstName);
+            // foreach (var ele in UpdatingEmpList) Console.WriteLine(ele.FirstName);
 
+            //    >> Aggregate operators: Aggregate, Avarage, Count, Sum, Max <<
+
+            // 1. Aggregate Operator, we can perform a custom operation on values within a collection
+            var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            var integerList2 = new List<int>() { 6, 7, 8, 9, 10 };
+
+            //requirement: total annual salaries and also include the addition of an appropirate annual
+            //salary bunes in the final results
+            // the Aggregate function takes an initial value for the accumulator (0 in this case),
+            //and a lambda function that defines how the accumulation should occur
+            decimal totalAnnualSalary = employeeList.Aggregate<Employee, decimal>(0, (accumulator, employeeObj) =>
+            {
+                var bonus = (employeeObj.IsManager) ? 0.04m : 0.02m;
+
+                // Calculate the annual salary with the bonus and add it to the running total
+                return accumulator + (employeeObj.AnnualSalary + (employeeObj.AnnualSalary * bonus));
+            });
+
+            Console.WriteLine($"Total Annual Salary of all employees (including bonus): {totalAnnualSalary}");
         }
     }
 }
