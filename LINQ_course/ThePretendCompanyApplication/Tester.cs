@@ -897,17 +897,34 @@ namespace ThePretendCompanyApplication
             //The into contextual keyword can be used to create a temporary identifier to store the results of a
             //group, join or select clause into a new identifier. This identifier can itself be a generator for additional
             //query commands.
+            //var results = from emp in employeeList
+            //              where emp.AnnualSalary > 50000
+            //              select emp
+            //              into HighEarners      // temporary identifier storing the result
+            //              where HighEarners.IsManager == true
+            //              select HighEarners;
+
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
+
+
+            //Let
+            /*In a query expression, it's sometimes useful to store the result of a subexpression in order to use it in 
+             * subsequent clauses. You can do this with the let keyword, which creates a new range variable and initializes 
+             * it with the result of the expression you supply.*/
             var results = from emp in employeeList
-                          where emp.AnnualSalary > 50000
-                          select emp
-                          into HighEarners      // temporary identifier storing the result
-                          where HighEarners.IsManager == true
-                          select HighEarners;
+                          let Initials = emp.FirstName.Substring(0, 1).ToUpper() + emp.LastName.Substring(0, 1).ToUpper()
+                          let AnnualSalaryPlusBonus = (emp.IsManager) ? emp.AnnualSalary + (emp.AnnualSalary * 0.04m) : emp.AnnualSalary + (emp.AnnualSalary * 0.02m)
+                          where Initials == "JS" || Initials == "SJ" && AnnualSalaryPlusBonus > 50000
+                          select new
+                          {
+                              Initials = Initials,
+                              FullName = emp.FirstName + " " + emp.LastName,
+                              AnnualSalaryPlusBonus = AnnualSalaryPlusBonus
+                          };
 
             foreach (var item in results)
-                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
-
-
+                Console.WriteLine($"{item.Initials,-5} {item.FullName,-20} {item.AnnualSalaryPlusBonus,10}");
         }
     }
 }
