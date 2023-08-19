@@ -885,13 +885,30 @@ namespace ThePretendCompanyApplication
             //    Console.WriteLine($"Key: {key}, Value: {dictionary[key].FirstName} {dictionary[key].LastName}");
 
             //ToArray
-            Employee[] results = (from emp in employeeList
-                                  where emp.AnnualSalary > 50000
-                                  select emp).ToArray();
+            //Employee[] results = (from emp in employeeList
+            //                      where emp.AnnualSalary > 50000
+            //                      select emp).ToArray();
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+
+            //Let Clause and Into Clause
+            //Into
+            //The into contextual keyword can be used to create a temporary identifier to store the results of a
+            //group, join or select clause into a new identifier. This identifier can itself be a generator for additional
+            //query commands.
+            var results = from emp in employeeList
+                          where emp.AnnualSalary > 50000
+                          select emp
+                          into HighEarners      // temporary identifier storing the result
+                          where HighEarners.IsManager == true
+                          select HighEarners;
+
             foreach (var item in results)
-                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
 
 
         }
     }
 }
+ 
