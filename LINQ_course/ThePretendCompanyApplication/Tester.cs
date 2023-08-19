@@ -865,12 +865,26 @@ namespace ThePretendCompanyApplication
             //List<Employee> results = from emp in employeeList
             //                       where emp.AnnualSalary > 50000
             //                       select emp;
-            List<Employee> results = (from emp in employeeList
-                                    where emp.AnnualSalary > 50000
-                                    select emp).ToList(); //Like this, but the query is executed immediately
+            //List<Employee> results = (from emp in employeeList
+            //                        where emp.AnnualSalary > 50000
+            //                        select emp).ToList(); //Like this, but the query is executed immediately
 
-            foreach (var item in results)
-                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+
+
+            //            >> To Dictionary <<
+            //If we want to convert an IEnumerable collection returned from a query to a Dictionary
+            //We can apply the toDictionary operator
+            Dictionary<int, Employee> dictionary = (from emp in employeeList
+                                                    where emp.AnnualSalary > 50000
+                                                    select emp).ToDictionary(e => e.Id);
+
+            foreach (var key in dictionary.Keys)
+                Console.WriteLine($"Key: {key}, Value: {dictionary[key].FirstName} {dictionary[key].LastName}");
+
+
         }
     }
 }
