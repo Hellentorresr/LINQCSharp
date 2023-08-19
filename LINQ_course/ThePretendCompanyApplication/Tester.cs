@@ -850,9 +850,25 @@ namespace ThePretendCompanyApplication
             // TakeWhile
             /*The LINQ TakeWhile Method in C# is used to fetch all the elements from a data source or a sequence or 
              * a collection until a specified condition is true.*/
-            employeeList.Add(new Employee { Id = 5, FirstName = "Sam", LastName = "Davis", AnnualSalary = 100000 });
+            //employeeList.Add(new Employee { Id = 5, FirstName = "Sam", LastName = "Davis", AnnualSalary = 100000 });
 
-            var results = employeeList.TakeWhile(e => e.AnnualSalary > 50000);
+            //var results = employeeList.TakeWhile(e => e.AnnualSalary > 50000);
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+
+
+            //      >> Conversion Operators - ToList, ToDictionary, ToArray <<
+            //ToList
+            //This query returs a generic IEnumerable collection, and we're attempting to assign an inumerable to a
+            //var type generic list, so we have to wrap the query in brackest and then call the toList method
+            //List<Employee> results = from emp in employeeList
+            //                       where emp.AnnualSalary > 50000
+            //                       select emp;
+            List<Employee> results = (from emp in employeeList
+                                    where emp.AnnualSalary > 50000
+                                    select emp).ToList(); //Like this, but the query is executed immediately
+
             foreach (var item in results)
                 Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
         }
