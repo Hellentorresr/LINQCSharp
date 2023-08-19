@@ -2,6 +2,7 @@
 using TCPData;
 using System.Linq;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace ThePretendCompanyApplication
 {
@@ -598,29 +599,361 @@ namespace ThePretendCompanyApplication
         public static void Main() 
         {
             //  Transforming data using LINQ's queries
-            List<Employee> employeeList = Data.GetEmployees();
-            List<Department> departmentList = Data.GetDepartments();
+            //List<Employee> employeeList = Data.GetEmployees();
+            //List<Department> departmentList = Data.GetDepartments();
 
             //equality operator 
             //SequenceEquals
             //Use case: we want to compare to lists of data and we want to know if these tho lists contains elements
             // of equal value and each ele of the relevant list are stored in the same order
-            var integerList = new List<int>() { 1, 2, 3, 4, 5, 6 };
-            var integerListTwo = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            //var integerList = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            //var integerListTwo = new List<int>() { 1, 2, 3, 4, 5, 6 };
 
-            var boolSequenceEqual = integerList.SequenceEqual(integerListTwo);
-          //  Console.WriteLine(boolSequenceEqual);// returns True
+            //var boolSequenceEqual = integerList.SequenceEqual(integerListTwo);
+            //  Console.WriteLine(boolSequenceEqual);// returns True
 
             //now using our own datatype
             //var employeeListCompare = Data.GetEmployees();
             //bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
-           // Console.WriteLine(boolEmp);//false, because we need to tell the compiler how to stablish equality between objects
+            // Console.WriteLine(boolEmp);//false, because we need to tell the compiler how to stablish equality between objects
 
             //now using our method to compare
-            var employeeListCompare = Data.GetEmployees();
-            bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
-            Console.WriteLine(boolEmp); //true
+            //var employeeListCompare = Data.GetEmployees();
+            //bool boolEmp = employeeList.SequenceEqual(employeeListCompare, new Utilities());
+            //Console.WriteLine(boolEmp); //true
 
+
+            //          >> The concatenation operator <<
+            //Concat
+            //var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            //var integerList2 = new List<int>() { 6, 7, 8, 9, 10};
+
+            //IEnumerable<int> integerListConcat = integerList.Concat(integerList2);  
+            //foreach (var integer in integerListConcat)Console.WriteLine(integer);
+
+            //another example
+            // List<Employee> employeesList2 = new() { new Employee { Id = 6, FirstName = "Hellen", LastName = "Torres", AnnualSalary = 10000, IsManager = true, DepartmentId = 3 } };
+
+            //var UpdatingEmpList = employeeList.Concat(employeesList2);
+
+            // foreach (var ele in UpdatingEmpList) Console.WriteLine(ele.FirstName);
+
+            //    >> Aggregate operators: Aggregate, Avarage, Count, Sum, Max <<
+
+            // 1. Aggregate Operator, we can perform a custom operation on values within a collection
+            //var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            //var integerList2 = new List<int>() { 6, 7, 8, 9, 10 };
+
+            //requirement: total annual salaries and also include the addition of an appropirate annual
+            //salary bunes in the final results
+            // the Aggregate function takes an initial value for the accumulator (0 in this case),
+            //and a lambda function that defines how the accumulation should occur
+            //decimal totalAnnualSalary = employeeList.Aggregate<Employee, decimal>(0, (accumulator, employeeObj) =>
+            //{
+            //    var bonus = (employeeObj.IsManager) ? 0.04m : 0.02m;
+
+            //    // Calculate the annual salary with the bonus and add it to the running total
+            //    return accumulator + (employeeObj.AnnualSalary + (employeeObj.AnnualSalary * bonus));
+            //});
+
+            //Console.WriteLine($"Total Annual Salary of all employees (including bonus): {totalAnnualSalary}");
+
+
+            //Avarage operator: is used to calculate the average of numeric values from the collection on which it is applied.
+            //This Average method can return nullable or non-nullable decimal, float, or double values.
+            //decimal avarageSalary = employeeList.Average(s => s.AnnualSalary);
+            //Console.WriteLine(avarageSalary);
+
+            //returning a string
+            //string data = employeeList.Aggregate("Employee annual salaries: (Including bunus): ", (str, empl) =>
+            //{
+            //    decimal bonus = (empl.IsManager) ? 0.04m : 0.02m;
+            //    return str += $"{empl.FirstName}{empl.LastName} - {empl.AnnualSalary + (empl.AnnualSalary * bonus)}, ";
+
+            //}, s => s[..^2]     //once the string is return this slice notation is excluding the last two characters
+            //);
+
+            //Console.WriteLine(data);
+
+            //           >> Avarage aggregate operator <<
+            //Calculates the average of the numeric items in the collection
+            //decimal avgSalary = employeeList.Average(emp => emp.AnnualSalary);
+            //Console.WriteLine($"Average annual salary: {avgSalary}");
+
+            //Calculate the average salary for all employees in the technology department
+            //method chaining
+            //decimal avgSalaryTechDep = employeeList.Where(e => e.DepartmentId == 1).Average(emp => emp.AnnualSalary);
+            //Console.WriteLine($"Average Annual Salary (Technology Department): {avgSalaryTechDep}");
+
+            //Count operator, counting how many employees we have in the collection of employees
+            // int totalEmployees = employeeList.Count();
+            // Console.WriteLine(totalEmployees);
+
+            //Count with a condition
+            //int totalEmployees = employeeList.Count(e => e.DepartmentId == 3);
+            //Console.WriteLine($"Number of Employees (Technology Department): {totalEmployees}");
+
+
+            //          >>  Sum aggregate operator:  Calculate total(sum) value of the collection
+            //decimal totalAnnualSalaries = employeeList.Sum(sal => sal.AnnualSalary);
+            //Console.WriteLine($"Total Annual Salaries: {totalAnnualSalaries}");
+
+            //          >>  Max aggregate operator:  Finds the largest value in the collection.
+            //decimal highesAnnualSal = employeeList.Max(sal => sal.AnnualSalary);
+            //Console.WriteLine($"Highest Annual Salary: {highesAnnualSal}");
+
+            //          >> Generation Operators - DefaultIfEmpty, Empty, Range, Repeat <<
+            //1. DefaultIfEmpty: When applied to an empty sequence, generate a default element within a sequence
+            //we can use this operator to return a new IEnumerable collection 
+            //List<int> intList = new();
+            //var newList = intList.DefaultIfEmpty();
+            //Console.WriteLine(newList.ElementAt(0)); //elementAt to check if the collection is  empty, returns the default vaue of 0
+
+            //now testing this method with a list
+            //List<Employee> employees = new ();
+            //var newList = employees.DefaultIfEmpty(new Employee { Id = 0});
+            //var result = newList.ElementAt(0);
+
+            //if(result.Id == 0) Console.WriteLine("The list is empty"); 
+
+            // The Empty operator: 	Returns an empty sequence of values and is the most simplest generational operator
+            //we can use this method to generate a new empty collection
+            //The empty method is not an extension method of IEnumerable or IQueryble like other linq methods
+            //it is a static method included in the Enumerable class
+            //  IEnumerable<Employee> emptyEmployeeList = Enumerable.Empty<Employee>(); but i have to cast it to a list because this IEnumerable does not come with CRUD methods
+            //List<Employee> emptyEmployeeList = Enumerable.Empty<Employee>().ToList();
+
+            //emptyEmployeeList.Add(new Employee { Id = 7, FirstName = "Dan", LastName = "Brown" });
+
+            //foreach (var item in emptyEmployeeList) Console.WriteLine($"{item.FirstName} {item.LastName}");
+
+            // >> Range operator: Generates a collection having a sequence of integers or numbers
+            // we can use this method to to return a collection of values that are within a specific range
+            //var intCollection = Enumerable.Range(25,20); // from 25 to 44
+            //foreach ( var integer in intCollection) Console.WriteLine( integer);
+
+            // Repeat operator: Generates a sequence containing repeated values of a specific length
+            //let's say we want to generate a collection of a specified amount of elements where a value
+            //for each element in the collection is repeated
+            //var strCollection = Enumerable.Repeat("Placeholder", 10);
+            //foreach ( var val in strCollection ) Console.WriteLine( val ); //"Placeholder" gets print 10 times
+
+            //Set Operators - Distinct, Except, Intersect, Union
+            //Distinct
+            //IEnumerable<string> listOfStr = new List<string>() { "Meghan", "Hellen", "Miguel", "Meghan" };
+
+            //var noRepeatValFilter = listOfStr.Distinct().ToList();//we will get only distict values returned
+            //foreach (var str in noRepeatValFilter) Console.WriteLine(str);
+
+            //List<int> list = new() { 1, 2 , 3, 4 , 4 ,5, 6, 6, 7, 8, 9 , 7 };
+            //var intFilterList = list.Distinct().ToList();
+            //foreach(var item in intFilterList) Console.WriteLine(item);
+
+            //let's say we have two collections of a specific type and we want to return elements with with values
+            // in our first collection that are not equal to any of the values of elements inour second collection
+            //Except operator
+            //The Except() method requires two collections. It returns a new collection with elements from the first
+            //collection which do not exist in the second collection (parameter collection). Except extension method doesn't
+            //return the correct result for the collection of complex types.
+
+            // var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            // var integerList2 = new List<int>() { 4, 6, 7, 8, 9, 10, 5, 1, };
+
+            //var result = integerList.Except(integerList2);
+            //foreach ( var val in result)Console.WriteLine(val); // = 2,1 //returns all the elems that don't exist in list 2
+
+            //In order to make the right comperizon between 2 objects
+            //we have to tell the compiler how to compare employee objects when determining if one employee obj
+            //is equal to another employee obj, we can use our class Utilities which implements the IEqualityComparer<Employee>
+            //List<Employee> employeeList2 = new()
+            //{
+            //    new Employee
+            //    {
+            //        Id = 1,
+            //        FirstName = "Bob",
+            //        LastName = "Jones",
+            //        AnnualSalary = 60000.3m,
+            //        IsManager = true,
+            //        DepartmentId = 2
+            //    },
+            //    new Employee
+            //    {
+            //        Id = 3,
+            //        FirstName = "Douglas",
+            //        LastName = "Roberts",
+            //        AnnualSalary = 40000.2m,
+            //        IsManager = false,
+            //        DepartmentId = 1
+            //    },
+            //    new Employee
+            //    {
+            //        Id = 5,
+            //        FirstName = "Craig",
+            //        LastName = "Laurence",
+            //        AnnualSalary = 20000.2m,
+            //        IsManager = false,
+            //        DepartmentId = 1
+            //    },
+            //    new Employee
+            //    {
+            //        Id = 6,
+            //        FirstName = "Elizabeth",
+            //        LastName = "Tate",
+            //        AnnualSalary = 85000,
+            //        IsManager = true,
+            //        DepartmentId = 1
+            //    }
+            //};
+
+            //var results = employeeList.Except(employeeList2, new Utilities()); //passing the Utilities class
+            //foreach (var val in results) Console.WriteLine(val.FirstName); // =  Sarah and Jane
+
+            // >> Intersect operator
+            //LINQ Intersect operator is used to find common elements between two sequences (collections).
+            //Intersect opertor comes under Set operators category in LINQ Query operators. For example,
+            //we have two collections A = { 1, 2, 3 } and B = { 3, 4, 5 }. Intersect operator will find common
+            //elements in both sequences.
+            //var resultIntersct = employeeList.Intersect(employeeList2, new Utilities());
+            //foreach (Employee emp in resultIntersct)Console.WriteLine(emp.FirstName + " " + emp.LastName);//Bob and Douglas
+
+
+            //      >>Union operator:
+            /*LINQ Union operator is used for finding unique elements between two sequences (Collections). For example, suppose 
+             we have two collections A = { 1, 2, 3 }, and B = { 3, 4, 5 }. Union operator will find unique elements in both sequences.*/
+            //var resultUnion = employeeList.Union(employeeList2, new Utilities());//we need to tell the compiler how to perform the comperison
+            //foreach (var result in resultUnion)Console.WriteLine(result.FirstName);
+
+            //Partitioning Operators - Skip, SkipWhile, Take, TakeWhile
+
+            //The LINQ Skip Method in C# is used to skip or bypass the first n number of elements from a data source or sequence
+            //and then returns the remaining elements from the data source as output.
+
+            //var results = employeeList.Skip(2);
+            //foreach (var item in results) Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10}");
+
+            //SkipWhile
+            //The SkipWhile() method in LINQ is another extension method that is used to skip elements from the beginning
+            //of a sequence while a specified condition is true and returns the remaining elements. The condition is defined
+            //using a predicate function that takes an element as input and returns a Boolean value.
+            // employeeList.Add(new Employee { Id = 5, FirstName = "Sam", LastName = "Davis", AnnualSalary = 100000.0m });
+
+            //var results = employeeList.SkipWhile(e => e.AnnualSalary > 50000);
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+            /*The LINQ >> Take() operator <<  is used to return the values from the given data structure. It takes an integer 
+            value as a parameter that represents the total number of elements to be retrieved from the given data structure.
+             */
+            //var results = employeeList.Take(2);
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10}");
+
+            // TakeWhile
+            /*The LINQ TakeWhile Method in C# is used to fetch all the elements from a data source or a sequence or 
+             * a collection until a specified condition is true.*/
+            //employeeList.Add(new Employee { Id = 5, FirstName = "Sam", LastName = "Davis", AnnualSalary = 100000 });
+
+            //var results = employeeList.TakeWhile(e => e.AnnualSalary > 50000);
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+
+
+            //      >> Conversion Operators - ToList, ToDictionary, ToArray <<
+            //ToList
+            //This query returs a generic IEnumerable collection, and we're attempting to assign an inumerable to a
+            //var type generic list, so we have to wrap the query in brackest and then call the toList method
+            //List<Employee> results = from emp in employeeList
+            //                       where emp.AnnualSalary > 50000
+            //                       select emp;
+            //List<Employee> results = (from emp in employeeList
+            //                        where emp.AnnualSalary > 50000
+            //                        select emp).ToList(); //Like this, but the query is executed immediately
+
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+
+
+            //            >> To Dictionary <<
+            //If we want to convert an IEnumerable collection returned from a query to a Dictionary
+            //We can apply the toDictionary operator
+            //Dictionary<int, Employee> dictionary = (from emp in employeeList
+            //                                        where emp.AnnualSalary > 50000
+            //                                        select emp).ToDictionary(e => e.Id);
+
+            //foreach (var key in dictionary.Keys)
+            //    Console.WriteLine($"Key: {key}, Value: {dictionary[key].FirstName} {dictionary[key].LastName}");
+
+            //ToArray
+            //Employee[] results = (from emp in employeeList
+            //                      where emp.AnnualSalary > 50000
+            //                      select emp).ToArray();
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
+
+
+            //Let Clause and Into Clause
+            //Into
+            //The into contextual keyword can be used to create a temporary identifier to store the results of a
+            //group, join or select clause into a new identifier. This identifier can itself be a generator for additional
+            //query commands.
+            //var results = from emp in employeeList
+            //              where emp.AnnualSalary > 50000
+            //              select emp
+            //              into HighEarners      // temporary identifier storing the result
+            //              where HighEarners.IsManager == true
+            //              select HighEarners;
+
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
+
+
+            //Let
+            /*In a query expression, it's sometimes useful to store the result of a subexpression in order to use it in 
+             * subsequent clauses. You can do this with the let keyword, which creates a new range variable and initializes 
+             * it with the result of the expression you supply.*/
+            //var results = from emp in employeeList
+            //              let Initials = emp.FirstName.Substring(0, 1).ToUpper() + emp.LastName.Substring(0, 1).ToUpper()
+            //              let AnnualSalaryPlusBonus = (emp.IsManager) ? emp.AnnualSalary + (emp.AnnualSalary * 0.04m) : emp.AnnualSalary + (emp.AnnualSalary * 0.02m)
+            //              where Initials == "JS" || Initials == "SJ" && AnnualSalaryPlusBonus > 50000
+            //              select new
+            //              {
+            //                  Initials = Initials,
+            //                  FullName = emp.FirstName + " " + emp.LastName,
+            //                  AnnualSalaryPlusBonus = AnnualSalaryPlusBonus
+            //              };
+
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Initials,-5} {item.FullName,-20} {item.AnnualSalaryPlusBonus,10}");
+
+
+
+            /*What is projection in C#? Projection refers to the act of transforming an object into a new form such that
+             * the newly created object contains only the properties that will be used. Language Integrated Query (LINQ) 
+             * provides support for two standard query projection operators, Select and SelectMany.*/
+            //Projection Operators - Select, SelectMany
+            //Select
+            List<Employee> employeeList = Data.GetEmployees();
+            List<Department> departmentList = Data.GetDepartments(employeeList);
+
+            //var results = departmentList.Select(d => d.Employees);
+
+            //foreach (var items in results)
+            //    foreach (var item in items)
+            //        Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
+
+            //with the select many we don't need a nested loop
+            /*The SelectMany method in LINQ is used to project each element of a sequence (collection) to an 
+             * IEnumerable<T> and then flattens the resulting sequences into one sequence. In other words, 
+             * it allows you to work with nested collections and flatten them into a single collection. 
+             * This is particularly useful when dealing with collections of collections*/
+
+            var results = departmentList.SelectMany(d => d.Employees); //.OrderBy(o => o.Id);
+
+            foreach (var item in results)
+                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
         }
     }
 }
+ 
