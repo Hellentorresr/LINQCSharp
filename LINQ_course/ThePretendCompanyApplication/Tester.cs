@@ -755,11 +755,11 @@ namespace ThePretendCompanyApplication
             //collection which do not exist in the second collection (parameter collection). Except extension method doesn't
             //return the correct result for the collection of complex types.
 
-            var integerList = new List<int>() { 1, 2, 3, 4, 5 };
-            var integerList2 = new List<int>() { 4, 6, 7, 8, 9, 10, 5, 1, };
+            // var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            // var integerList2 = new List<int>() { 4, 6, 7, 8, 9, 10, 5, 1, };
 
-           var result = integerList.Except(integerList2);
-           foreach ( var val in result)Console.WriteLine(val); // = 2,1 //returns all the elems that don't exist in list 2
+            //var result = integerList.Except(integerList2);
+            //foreach ( var val in result)Console.WriteLine(val); // = 2,1 //returns all the elems that don't exist in list 2
 
             //In order to make the right comperizon between 2 objects
             //we have to tell the compiler how to compare employee objects when determining if one employee obj
@@ -804,8 +804,16 @@ namespace ThePretendCompanyApplication
                 }
             };
 
-            var results = employeeList.Except(employeeList2, new Utilities()); //passing the Utilities class
-            foreach (var val in results) Console.WriteLine(val.FirstName);
+            //var results = employeeList.Except(employeeList2, new Utilities()); //passing the Utilities class
+            //foreach (var val in results) Console.WriteLine(val.FirstName); // =  Sarah and Jane
+
+            // >> Intersect operator
+            //LINQ Intersect operator is used to find common elements between two sequences (collections).
+            //Intersect opertor comes under Set operators category in LINQ Query operators. For example,
+            //we have two collections A = { 1, 2, 3 } and B = { 3, 4, 5 }. Intersect operator will find common
+            //elements in both sequences.
+            var resultIntersct = employeeList.Intersect(employeeList2, new Utilities());
+            foreach (Employee emp in resultIntersct)Console.WriteLine(emp.FirstName + " " + emp.LastName);//Bob and Douglas
         }
     }
 }
