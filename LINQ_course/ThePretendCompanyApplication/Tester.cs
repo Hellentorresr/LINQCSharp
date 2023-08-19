@@ -728,8 +728,14 @@ namespace ThePretendCompanyApplication
 
             // >> Range operator: Generates a collection having a sequence of integers or numbers
             // we can use this method to to return a collection of values that are within a specific range
-            var intCollection = Enumerable.Range(25,20); // from 25 to 44
-            foreach ( var integer in intCollection) Console.WriteLine( integer);
+            //var intCollection = Enumerable.Range(25,20); // from 25 to 44
+            //foreach ( var integer in intCollection) Console.WriteLine( integer);
+
+            // Repeat operator: Generates a sequence containing repeated values of a specific length
+            //let's say we want to generate a collection of a specified amount of elements where a value
+            //for each element in the collection is repeated
+            var strCollection = Enumerable.Repeat("Placeholder", 10);
+            foreach ( var val in strCollection ) Console.WriteLine( val ); //"Placeholder" gets print 10 times
         }
     }
 }
