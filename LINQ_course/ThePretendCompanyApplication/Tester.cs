@@ -720,11 +720,16 @@ namespace ThePretendCompanyApplication
             //The empty method is not an extension method of IEnumerable or IQueryble like other linq methods
             //it is a static method included in the Enumerable class
             //  IEnumerable<Employee> emptyEmployeeList = Enumerable.Empty<Employee>(); but i have to cast it to a list because this IEnumerable does not come with CRUD methods
-            List<Employee> emptyEmployeeList = Enumerable.Empty<Employee>().ToList();
+            //List<Employee> emptyEmployeeList = Enumerable.Empty<Employee>().ToList();
 
-            emptyEmployeeList.Add(new Employee { Id = 7, FirstName = "Dan", LastName = "Brown" });
+            //emptyEmployeeList.Add(new Employee { Id = 7, FirstName = "Dan", LastName = "Brown" });
 
-            foreach (var item in emptyEmployeeList) Console.WriteLine($"{item.FirstName} {item.LastName}");
+            //foreach (var item in emptyEmployeeList) Console.WriteLine($"{item.FirstName} {item.LastName}");
+
+            // >> Range operator: Generates a collection having a sequence of integers or numbers
+            // we can use this method to to return a collection of values that are within a specific range
+            var intCollection = Enumerable.Range(25,20); // from 25 to 44
+            foreach ( var integer in intCollection) Console.WriteLine( integer);
         }
     }
 }
