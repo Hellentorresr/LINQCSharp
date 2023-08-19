@@ -640,8 +640,8 @@ namespace ThePretendCompanyApplication
             //    >> Aggregate operators: Aggregate, Avarage, Count, Sum, Max <<
 
             // 1. Aggregate Operator, we can perform a custom operation on values within a collection
-            var integerList = new List<int>() { 1, 2, 3, 4, 5 };
-            var integerList2 = new List<int>() { 6, 7, 8, 9, 10 };
+            //var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            //var integerList2 = new List<int>() { 6, 7, 8, 9, 10 };
 
             //requirement: total annual salaries and also include the addition of an appropirate annual
             //salary bunes in the final results
@@ -734,8 +734,78 @@ namespace ThePretendCompanyApplication
             // Repeat operator: Generates a sequence containing repeated values of a specific length
             //let's say we want to generate a collection of a specified amount of elements where a value
             //for each element in the collection is repeated
-            var strCollection = Enumerable.Repeat("Placeholder", 10);
-            foreach ( var val in strCollection ) Console.WriteLine( val ); //"Placeholder" gets print 10 times
+            //var strCollection = Enumerable.Repeat("Placeholder", 10);
+            //foreach ( var val in strCollection ) Console.WriteLine( val ); //"Placeholder" gets print 10 times
+
+            //Set Operators - Distinct, Except, Intersect, Union
+            //Distinct
+            //IEnumerable<string> listOfStr = new List<string>() { "Meghan", "Hellen", "Miguel", "Meghan" };
+
+            //var noRepeatValFilter = listOfStr.Distinct().ToList();//we will get only distict values returned
+            //foreach (var str in noRepeatValFilter) Console.WriteLine(str);
+
+            //List<int> list = new() { 1, 2 , 3, 4 , 4 ,5, 6, 6, 7, 8, 9 , 7 };
+            //var intFilterList = list.Distinct().ToList();
+            //foreach(var item in intFilterList) Console.WriteLine(item);
+
+            //let's say we have two collections of a specific type and we want to return elements with with values
+            // in our first collection that are not equal to any of the values of elements inour second collection
+            //Except operator
+            //The Except() method requires two collections. It returns a new collection with elements from the first
+            //collection which do not exist in the second collection (parameter collection). Except extension method doesn't
+            //return the correct result for the collection of complex types.
+
+            var integerList = new List<int>() { 1, 2, 3, 4, 5 };
+            var integerList2 = new List<int>() { 4, 6, 7, 8, 9, 10, 5, 1, };
+
+           var result = integerList.Except(integerList2);
+           foreach ( var val in result)Console.WriteLine(val); // = 2,1 //returns all the elems that don't exist in list 2
+
+            //In order to make the right comperizon between 2 objects
+            //we have to tell the compiler how to compare employee objects when determining if one employee obj
+            //is equal to another employee obj, we can use our class Utilities which implements the IEqualityComparer<Employee>
+            List<Employee> employeeList2 = new()
+            {
+                new Employee
+                {
+                    Id = 1,
+                    FirstName = "Bob",
+                    LastName = "Jones",
+                    AnnualSalary = 60000.3m,
+                    IsManager = true,
+                    DepartmentId = 2
+                },
+                new Employee
+                {
+                    Id = 3,
+                    FirstName = "Douglas",
+                    LastName = "Roberts",
+                    AnnualSalary = 40000.2m,
+                    IsManager = false,
+                    DepartmentId = 1
+                },
+                new Employee
+                {
+                    Id = 5,
+                    FirstName = "Craig",
+                    LastName = "Laurence",
+                    AnnualSalary = 20000.2m,
+                    IsManager = false,
+                    DepartmentId = 1
+                },
+                new Employee
+                {
+                    Id = 6,
+                    FirstName = "Elizabeth",
+                    LastName = "Tate",
+                    AnnualSalary = 85000,
+                    IsManager = true,
+                    DepartmentId = 1
+                }
+            };
+
+            var results = employeeList.Except(employeeList2, new Utilities()); //passing the Utilities class
+            foreach (var val in results) Console.WriteLine(val.FirstName);
         }
     }
 }
