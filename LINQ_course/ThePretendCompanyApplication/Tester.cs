@@ -812,8 +812,15 @@ namespace ThePretendCompanyApplication
             //Intersect opertor comes under Set operators category in LINQ Query operators. For example,
             //we have two collections A = { 1, 2, 3 } and B = { 3, 4, 5 }. Intersect operator will find common
             //elements in both sequences.
-            var resultIntersct = employeeList.Intersect(employeeList2, new Utilities());
-            foreach (Employee emp in resultIntersct)Console.WriteLine(emp.FirstName + " " + emp.LastName);//Bob and Douglas
+            //var resultIntersct = employeeList.Intersect(employeeList2, new Utilities());
+            //foreach (Employee emp in resultIntersct)Console.WriteLine(emp.FirstName + " " + emp.LastName);//Bob and Douglas
+
+
+            //      >>Union operator:
+            /*LINQ Union operator is used for finding unique elements between two sequences (Collections). For example, suppose 
+             we have two collections A = { 1, 2, 3 }, and B = { 3, 4, 5 }. Union operator will find unique elements in both sequences.*/
+            var resultUnion = employeeList.Union(employeeList2, new Utilities());//we need to tell the compiler how to perform the comperison
+            foreach (var result in resultUnion)Console.WriteLine(result.FirstName);
         }
     }
 }
