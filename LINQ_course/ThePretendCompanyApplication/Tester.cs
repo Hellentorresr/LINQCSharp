@@ -2,6 +2,7 @@
 using TCPData;
 using System.Linq;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace ThePretendCompanyApplication
 {
@@ -598,8 +599,8 @@ namespace ThePretendCompanyApplication
         public static void Main() 
         {
             //  Transforming data using LINQ's queries
-           List<Employee> employeeList = Data.GetEmployees();
-           List<Department> departmentList = Data.GetDepartments();
+            //List<Employee> employeeList = Data.GetEmployees();
+            //List<Department> departmentList = Data.GetDepartments();
 
             //equality operator 
             //SequenceEquals
@@ -912,19 +913,46 @@ namespace ThePretendCompanyApplication
             /*In a query expression, it's sometimes useful to store the result of a subexpression in order to use it in 
              * subsequent clauses. You can do this with the let keyword, which creates a new range variable and initializes 
              * it with the result of the expression you supply.*/
-            var results = from emp in employeeList
-                          let Initials = emp.FirstName.Substring(0, 1).ToUpper() + emp.LastName.Substring(0, 1).ToUpper()
-                          let AnnualSalaryPlusBonus = (emp.IsManager) ? emp.AnnualSalary + (emp.AnnualSalary * 0.04m) : emp.AnnualSalary + (emp.AnnualSalary * 0.02m)
-                          where Initials == "JS" || Initials == "SJ" && AnnualSalaryPlusBonus > 50000
-                          select new
-                          {
-                              Initials = Initials,
-                              FullName = emp.FirstName + " " + emp.LastName,
-                              AnnualSalaryPlusBonus = AnnualSalaryPlusBonus
-                          };
+            //var results = from emp in employeeList
+            //              let Initials = emp.FirstName.Substring(0, 1).ToUpper() + emp.LastName.Substring(0, 1).ToUpper()
+            //              let AnnualSalaryPlusBonus = (emp.IsManager) ? emp.AnnualSalary + (emp.AnnualSalary * 0.04m) : emp.AnnualSalary + (emp.AnnualSalary * 0.02m)
+            //              where Initials == "JS" || Initials == "SJ" && AnnualSalaryPlusBonus > 50000
+            //              select new
+            //              {
+            //                  Initials = Initials,
+            //                  FullName = emp.FirstName + " " + emp.LastName,
+            //                  AnnualSalaryPlusBonus = AnnualSalaryPlusBonus
+            //              };
+
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Initials,-5} {item.FullName,-20} {item.AnnualSalaryPlusBonus,10}");
+
+
+
+            /*What is projection in C#? Projection refers to the act of transforming an object into a new form such that
+             * the newly created object contains only the properties that will be used. Language Integrated Query (LINQ) 
+             * provides support for two standard query projection operators, Select and SelectMany.*/
+            //Projection Operators - Select, SelectMany
+            //Select
+            List<Employee> employeeList = Data.GetEmployees();
+            List<Department> departmentList = Data.GetDepartments(employeeList);
+
+            //var results = departmentList.Select(d => d.Employees);
+
+            //foreach (var items in results)
+            //    foreach (var item in items)
+            //        Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
+
+            //with the select many we don't need a nested loop
+            /*The SelectMany method in LINQ is used to project each element of a sequence (collection) to an 
+             * IEnumerable<T> and then flattens the resulting sequences into one sequence. In other words, 
+             * it allows you to work with nested collections and flatten them into a single collection. 
+             * This is particularly useful when dealing with collections of collections*/
+
+            var results = departmentList.SelectMany(d => d.Employees); //.OrderBy(o => o.Id);
 
             foreach (var item in results)
-                Console.WriteLine($"{item.Initials,-5} {item.FullName,-20} {item.AnnualSalaryPlusBonus,10}");
+                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}\t{item.IsManager}");
         }
     }
 }
