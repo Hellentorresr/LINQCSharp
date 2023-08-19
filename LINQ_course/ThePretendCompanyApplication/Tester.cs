@@ -764,45 +764,45 @@ namespace ThePretendCompanyApplication
             //In order to make the right comperizon between 2 objects
             //we have to tell the compiler how to compare employee objects when determining if one employee obj
             //is equal to another employee obj, we can use our class Utilities which implements the IEqualityComparer<Employee>
-            List<Employee> employeeList2 = new()
-            {
-                new Employee
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Jones",
-                    AnnualSalary = 60000.3m,
-                    IsManager = true,
-                    DepartmentId = 2
-                },
-                new Employee
-                {
-                    Id = 3,
-                    FirstName = "Douglas",
-                    LastName = "Roberts",
-                    AnnualSalary = 40000.2m,
-                    IsManager = false,
-                    DepartmentId = 1
-                },
-                new Employee
-                {
-                    Id = 5,
-                    FirstName = "Craig",
-                    LastName = "Laurence",
-                    AnnualSalary = 20000.2m,
-                    IsManager = false,
-                    DepartmentId = 1
-                },
-                new Employee
-                {
-                    Id = 6,
-                    FirstName = "Elizabeth",
-                    LastName = "Tate",
-                    AnnualSalary = 85000,
-                    IsManager = true,
-                    DepartmentId = 1
-                }
-            };
+            //List<Employee> employeeList2 = new()
+            //{
+            //    new Employee
+            //    {
+            //        Id = 1,
+            //        FirstName = "Bob",
+            //        LastName = "Jones",
+            //        AnnualSalary = 60000.3m,
+            //        IsManager = true,
+            //        DepartmentId = 2
+            //    },
+            //    new Employee
+            //    {
+            //        Id = 3,
+            //        FirstName = "Douglas",
+            //        LastName = "Roberts",
+            //        AnnualSalary = 40000.2m,
+            //        IsManager = false,
+            //        DepartmentId = 1
+            //    },
+            //    new Employee
+            //    {
+            //        Id = 5,
+            //        FirstName = "Craig",
+            //        LastName = "Laurence",
+            //        AnnualSalary = 20000.2m,
+            //        IsManager = false,
+            //        DepartmentId = 1
+            //    },
+            //    new Employee
+            //    {
+            //        Id = 6,
+            //        FirstName = "Elizabeth",
+            //        LastName = "Tate",
+            //        AnnualSalary = 85000,
+            //        IsManager = true,
+            //        DepartmentId = 1
+            //    }
+            //};
 
             //var results = employeeList.Except(employeeList2, new Utilities()); //passing the Utilities class
             //foreach (var val in results) Console.WriteLine(val.FirstName); // =  Sarah and Jane
@@ -819,8 +819,26 @@ namespace ThePretendCompanyApplication
             //      >>Union operator:
             /*LINQ Union operator is used for finding unique elements between two sequences (Collections). For example, suppose 
              we have two collections A = { 1, 2, 3 }, and B = { 3, 4, 5 }. Union operator will find unique elements in both sequences.*/
-            var resultUnion = employeeList.Union(employeeList2, new Utilities());//we need to tell the compiler how to perform the comperison
-            foreach (var result in resultUnion)Console.WriteLine(result.FirstName);
+            //var resultUnion = employeeList.Union(employeeList2, new Utilities());//we need to tell the compiler how to perform the comperison
+            //foreach (var result in resultUnion)Console.WriteLine(result.FirstName);
+
+            //Partitioning Operators - Skip, SkipWhile, Take, TakeWhile
+
+            //The LINQ Skip Method in C# is used to skip or bypass the first n number of elements from a data source or sequence
+            //and then returns the remaining elements from the data source as output.
+
+            //var results = employeeList.Skip(2);
+            //foreach (var item in results) Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10}");
+
+            //SkipWhile
+            //The SkipWhile() method in LINQ is another extension method that is used to skip elements from the beginning
+            //of a sequence while a specified condition is true and returns the remaining elements. The condition is defined
+            //using a predicate function that takes an element as input and returns a Boolean value.
+         employeeList.Add(new Employee { Id = 5, FirstName = "Sam", LastName = "Davis", AnnualSalary = 100000.0m });
+
+            var results = employeeList.SkipWhile(e => e.AnnualSalary > 50000);
+            foreach (var item in results)
+                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
         }
     }
 }
