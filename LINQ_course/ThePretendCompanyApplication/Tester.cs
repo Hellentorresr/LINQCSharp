@@ -843,9 +843,18 @@ namespace ThePretendCompanyApplication
             /*The LINQ >> Take() operator <<  is used to return the values from the given data structure. It takes an integer 
             value as a parameter that represents the total number of elements to be retrieved from the given data structure.
              */
-            var results = employeeList.Take(2);
+            //var results = employeeList.Take(2);
+            //foreach (var item in results)
+            //    Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10}");
+
+            // TakeWhile
+            /*The LINQ TakeWhile Method in C# is used to fetch all the elements from a data source or a sequence or 
+             * a collection until a specified condition is true.*/
+            employeeList.Add(new Employee { Id = 5, FirstName = "Sam", LastName = "Davis", AnnualSalary = 100000 });
+
+            var results = employeeList.TakeWhile(e => e.AnnualSalary > 50000);
             foreach (var item in results)
-                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10}");
+                Console.WriteLine($"{item.Id,-5} {item.FirstName,-10} {item.LastName,-10} {item.AnnualSalary,10}");
         }
     }
 }
